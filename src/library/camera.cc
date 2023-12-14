@@ -159,6 +159,8 @@ namespace CameraApi {
         EdsSetPropertyData(edsCamera_, 0x01000000, 0xFA71F7, sizeof(id), &id);
         id = kEdsPropID_SummerTimeSetting;
         EdsSetPropertyData(edsCamera_, 0x01000000, 0x9780670, sizeof(id), &id);
+        id = kEdsPropID_Aspect;
+        EdsSetPropertyData(edsCamera_, 0x01000000, 0x3FB1718B, sizeof(id), &id);
 
         EdsError error = EdsOpenSession(edsCamera_);
         if (error != EDS_ERR_OK) {

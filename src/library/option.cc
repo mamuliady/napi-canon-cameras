@@ -209,7 +209,8 @@ namespace CameraApi {
             StaticValue("RedEye", CreateOptionGroup(env, kEdsPropID_RedEye), napi_enumerable),
             StaticValue("Record", CreateOptionGroup(env, kEdsPropID_Record), napi_enumerable),
             StaticValue("SaveTo", CreateOptionGroup(env, kEdsPropID_SaveTo), napi_enumerable),
-            StaticValue("WhiteBalance", CreateOptionGroup(env, kEdsPropID_WhiteBalance), napi_enumerable)
+            StaticValue("WhiteBalance", CreateOptionGroup(env, kEdsPropID_WhiteBalance), napi_enumerable),
+            StaticValue("Aspect", CreateOptionGroup(env, kEdsPropID_Aspect), napi_enumerable)
         };
 
         Napi::Function func = DefineClass(env, Option::JSClassName, properties);

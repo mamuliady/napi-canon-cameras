@@ -580,5 +580,17 @@ export class Option implements PropertyValue {
         'WhitePaper5': 19,
     };
 
+    /**
+     * @readonly
+     * @enum {number}
+     */
+    static readonly Aspect: {[key: string]: number} = {
+        '4:3': 2,
+        '16:9': 7,
+        'apsc': 13,
+        'full': 0,
+        'square': 1,
+    };
+
     // GenerateEnd
 }

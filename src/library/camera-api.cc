@@ -1,5 +1,6 @@
 #include <napi.h>
 #include "aperture.h"
+#include "aspect.h"
 #include "api-error.h"
 #include "camera-browser.h"
 #include "camera-file.h"
@@ -24,6 +25,7 @@ namespace CameraApi {
         Napi::HandleScope scope(env);
         Aperture::Init(env, exports);
         ApiError::Init(env, exports);
+        Aspect::Init(env, exports);
         CameraBrowserWrap::Init(env, exports);
         CameraFile::Init(env, exports);
         CameraProperty::Init(env, exports);

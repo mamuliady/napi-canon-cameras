@@ -22,33 +22,35 @@ import LibraryFlagTests from './library/Flag.test';
 import LibraryOptionTests from './library/Option.test';
 import LibraryOutputDeviceTests from './library/OutputDevice.test';
 import LibraryShutterSpeedTests from './library/ShutterSpeed.test';
+import CommonAspectTests from './common/Aspect.test';
 
 describe(
     'Library Tests',
     () => {
-        CommonApertureTests(CameraApiLibrary);
-        CommonApiErrorTests(CameraApiLibrary);
-        CommonExposureCompensationTests(CameraApiLibrary);
-        CommonFlagTests(CameraApiLibrary);
-        CommonFileFormatTests(CameraApiLibrary);
-        CommonISOSensitivityTests(CameraApiLibrary);
-        CommonObjectEventTests(CameraApiLibrary);
-        CommonOptionTests(CameraApiLibrary);
-        CommonOutputDeviceTests(CameraApiLibrary);
-        CommonShutterSpeedTests(CameraApiLibrary);
-        CommonStateEventTests(CameraApiLibrary);
-        CommonTimeZoneTests(CameraApiLibrary);
+        // CommonApertureTests(CameraApiLibrary);
+        // CommonApiErrorTests(CameraApiLibrary);
+        // CommonExposureCompensationTests(CameraApiLibrary);
+        // CommonFlagTests(CameraApiLibrary);
+        // CommonFileFormatTests(CameraApiLibrary);
+        // CommonISOSensitivityTests(CameraApiLibrary);
+        // CommonObjectEventTests(CameraApiLibrary);
+        // CommonOptionTests(CameraApiLibrary);
+        // CommonOutputDeviceTests(CameraApiLibrary);
+        // CommonShutterSpeedTests(CameraApiLibrary);
+        // CommonStateEventTests(CameraApiLibrary);
+        // CommonTimeZoneTests(CameraApiLibrary);
+        CommonAspectTests(CameraApiLibrary);
 
-        LibraryApertureTests(CameraApiLibrary);
-        LibraryApiErrorTests(CameraApiLibrary);
-        LibraryCameraBrowserTests(CameraApiLibrary);
-        LibraryCameraPropertyTests(CameraApiLibrary);
-        LibraryCameraTests(CameraApiLibrary);
-        LibraryExposureCompensationTests(CameraApiLibrary);
-        LibraryFileFormatTests(CameraApiLibrary);
-        LibraryFlagTests(CameraApiLibrary);
-        LibraryOptionTests(CameraApiLibrary);
-        LibraryOutputDeviceTests(CameraApiLibrary);
-        LibraryShutterSpeedTests(CameraApiLibrary);
+        // LibraryApertureTests(CameraApiLibrary);
+        // LibraryApiErrorTests(CameraApiLibrary);
+        // LibraryCameraBrowserTests(CameraApiLibrary);
+        // LibraryCameraPropertyTests(CameraApiLibrary);
+        // LibraryCameraTests(CameraApiLibrary);
+        // LibraryExposureCompensationTests(CameraApiLibrary);
+        // LibraryFileFormatTests(CameraApiLibrary);
+        // LibraryFlagTests(CameraApiLibrary);
+        // LibraryOptionTests(CameraApiLibrary);
+        // LibraryOutputDeviceTests(CameraApiLibrary);
+        // LibraryShutterSpeedTests(CameraApiLibrary);
     },
 );

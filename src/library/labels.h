@@ -22,6 +22,8 @@ namespace CameraApi {
             static const LabelMap &AEModeSelect();
 
             static const LabelMap &AFMode();
+            
+            static const LabelMap &Aspect();
 
             static const LabelMap &Bracket();
 

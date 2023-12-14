@@ -94,6 +94,7 @@ namespace CameraApi {
             // Capture Properties
             {kEdsPropID_AEMode, "AEMode"},
             {kEdsPropID_DriveMode, "DriveMode"},
+            {kEdsPropID_Aspect, "Aspect"},
             {kEdsPropID_ISOSpeed, "ISOSpeed"},
             {kEdsPropID_MeteringMode, "MeteringMode"},
             {kEdsPropID_AFMode, "AFMode"},
@@ -323,6 +324,17 @@ namespace CameraApi {
             {2, "AIFocus"},
             {3, "ManualFocus"},
             {0xffffffff, "NotValid"},
+        };
+        return map;
+    }
+
+    const LabelMap &Labels::Aspect() {
+        static const LabelMap map = {
+            {0x00000000, "full"},
+            {0x00000001, "square"},
+            {0x00000002, "4:3"},
+            {0x00000007, "16:9"},
+            {0x0000000d, "apsc"},
         };
         return map;
     }
@@ -1058,6 +1070,7 @@ namespace CameraApi {
             {kEdsPropID_AEMode, AEMode()},
             {kEdsPropID_AEModeSelect, AEModeSelect()},
             {kEdsPropID_AFMode, AFMode()},
+            {kEdsPropID_Aspect, Aspect()},
             {kEdsPropID_BatteryQuality, BatteryQuality()},
             {kEdsPropID_Bracket, Bracket()},
             {kEdsPropID_ColorSpace, ColorSpace()},

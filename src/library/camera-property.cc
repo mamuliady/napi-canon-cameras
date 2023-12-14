@@ -1,5 +1,6 @@
 #include <ctime>
 
+#include "aspect.h"
 #include "camera-property.h"
 #include "labels.h"
 #include "flag.h"
@@ -34,7 +35,8 @@ namespace CameraApi {
             kEdsPropID_Evf_AFMode,
             kEdsPropID_DC_Strobe,
             kEdsPropID_DC_Zoom,
-            kEdsPropID_MovieParam
+            kEdsPropID_MovieParam,
+            kEdsPropID_Aspect
         };
         return list;
     }
@@ -103,6 +105,7 @@ namespace CameraApi {
             env, EdsGetPropertySize(
                 edsCamera_, propertyIdentifier_, propertySpecifier_, &dataType, &dataSize
             ));
+            
         switch (dataType) {
             case kEdsDataType_Int32:
                 EdsInt32 int32_value;
@@ -150,7 +153,7 @@ namespace CameraApi {
             default:
                 std::string message = "Failed to get property: ";
                 message.append(CodeToHexLabel(propertyIdentifier_));
-                message.append(", data type not implemented: ");
+                message.append(", get data type not implemented: ");
                 message.append(std::to_string(dataType));
                 throw Napi::Error::New(env, message);
         }
@@ -181,6 +184,10 @@ namespace CameraApi {
                 );
             case kEdsPropID_TimeZone:
                 return TimeZone::NewInstance(
+                    env, value.As<Napi::Number>().Uint32Value()
+                );
+            case kEdsPropID_Aspect:
+                return Aspect::NewInstance(
                     env, value.As<Napi::Number>().Uint32Value()
                 );
             default:
@@ -300,6 +307,9 @@ namespace CameraApi {
                 case kEdsPropID_TimeZone:
                     values.Set(i, TimeZone::NewInstance(env, propertyDescription.propDesc[i]));
                     break;
+                case kEdsPropID_Aspect:
+                    values.Set(i, Aspect::NewInstance(env, propertyDescription.propDesc[i]));
+                    break;
                 default:
                     if (Option::IsOptionsProperty(propertyIdentifier_)) {
                         values.Set(
@@ -333,6 +343,21 @@ namespace CameraApi {
         );
 
         if (isLookUpProperty()) {
+            // EdsPropertyDesc propertyDescription;
+            // EdsError error = EdsGetPropertyDesc(edsCamera_, propertyIdentifier_, &propertyDescription);
+            // std::string message = "isLookUpProperty ";
+            // for (int i = 0; i < propertyDescription.numElements; ++i) {
+            //     std::string kmessage = "| ";
+            //     kmessage.append(std::to_string(propertyDescription.propDesc[i]));
+            //     message.append(kmessage);
+
+            // }
+
+            // // ApiError::ThrowIfFailed(info.Env(), propertyDescription);
+            // message.append(CodeToHexLabel(propertyIdentifier_));
+            // message.append(std::to_string(error));
+
+            // throw Napi::Error::New(env, message);
             if (!isAllowedPropertyValue(value.As<Napi::Number>().Int32Value())) {
                 ApiError::ThrowIfFailed(info.Env(), EDS_ERR_INVALID_DEVICEPROP_VALUE);
             }
@@ -383,8 +408,10 @@ namespace CameraApi {
             default:
                 std::string message = "Failed to set property: ";
                 message.append(CodeToHexLabel(propertyIdentifier_));
-                message.append(", data type not implemented: ");
+                message.append(", set data type not implemented: ");
                 message.append(std::to_string(dataType));
+                message.append(" | kEdsDataType_UInt32: ");
+                message.append(std::to_string(kEdsDataType_UInt32));
                 throw Napi::Error::New(env, message);
         }
         if (error == EDS_ERR_OK) {

@@ -17,7 +17,9 @@ import { ShutterSpeed } from './ShutterSpeed';
 import { StateEvent } from './StateEvent';
 import { TimeZone } from './TimeZone';
 import { Volume } from './Volume';
+import { Aspect } from './Aspect';
 
+export * from './Aspect';
 export * from './Aperture';
 export * from './ApiError';
 export * from './Camera';
@@ -64,6 +66,7 @@ export const cameraBrowser = new CameraBrowser();
  */
 const CameraApi = {
     Aperture,
+    Aspect,
     ApiError,
     Camera,
     CameraBrowser,

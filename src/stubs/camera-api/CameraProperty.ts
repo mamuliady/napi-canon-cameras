@@ -168,6 +168,7 @@ export class CameraProperty {
         'AEModeSelect': 1078,
         'AFMode': 1028,
         'Artist': 1048,
+        'Aspect': 16778289,
         'AutoPowerOffSetting': 16778334,
         'Av': 1029,
         'AvailableShots': 1034,

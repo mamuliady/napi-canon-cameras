@@ -1,6 +1,6 @@
 {
     "variables": {
-        "edsdk_version": "131520",
+        "edsdk_version": "131601CD",
         "edsdk_directory%": "EDSDK"
     },
     "defines": [
@@ -15,6 +15,7 @@
             "sources": [
                 "./src/library/api-error.cc",
                 "./src/library/api-identifier.cc",
+                "./src/library/aspect.cc",
                 "./src/library/base64.cc",
                 "./src/library/camera.cc",
                 "./src/library/camera-browser.cc",
@@ -59,7 +60,7 @@
                     "OS==\"win\" and target_arch==\"x64\"",
                     {
                         "variables": {
-                            "edsdk_directory": "EDSDKv<(edsdk_version)W"
+                            "edsdk_directory": "EDSDKv<(edsdk_version)"
                         },
                         "include_dirs": [
                             "<(module_root_dir)/third_party/<(edsdk_directory)/Windows/EDSDK/Header"
@@ -82,7 +83,7 @@
                     "OS==\"win\" and target_arch==\"ia32\"",
                     {
                         "variables": {
-                            "edsdk_directory": "EDSDKv<(edsdk_version)W"
+                            "edsdk_directory": "EDSDKv<(edsdk_version)"
                         },
                         "include_dirs": [
                             "<(module_root_dir)/third_party/<(edsdk_directory)/Windows/EDSDK/Header"
