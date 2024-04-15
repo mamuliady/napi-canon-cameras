@@ -497,6 +497,18 @@ namespace CameraApi {
                 Napi::Object event = Napi::Object::New(env);
                 event.Set("camera", CameraWrap::NewInstance(env, dataPtr->camera));
                 switch (dataPtr->eventID) {
+                    case kEdsObjectEvent_DirItemRequestTransferDT:
+                        event.Set(
+                            "file",
+                            CameraFile::NewInstance(env, (EdsDirectoryItemRef) dataPtr->objectRef)
+                        );
+                        jsCallback.Call(
+                            {
+                                Napi::String::New(env, EventName_DownloadRequest),
+                                event
+                            }
+                        );
+                        break;
                     case kEdsObjectEvent_DirItemRequestTransfer:
                         event.Set(
                             "file",
@@ -757,9 +769,9 @@ namespace CameraApi {
     Napi::Value CameraWrap::GetLiveViewImage(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
         std::string image;
-        if (camera_->isLiveViewActive()) {
+        // if (camera_->isLiveViewActive()) {
             return LiveViewImage::NewInstance(info.Env(), camera_->getEdsReference());
-        }
+        // }
         return info.Env().Undefined();
     }
 
