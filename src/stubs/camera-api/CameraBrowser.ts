@@ -41,6 +41,7 @@ export class CameraBrowser {
      * ```
      */
     constructor() {
+        console.log('');
     }
 
     /**

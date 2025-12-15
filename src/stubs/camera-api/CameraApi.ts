@@ -10,6 +10,7 @@ import { FileFormat } from './FileFormat';
 import { Flag } from './Flag';
 import { ImageQuality } from './ImageQuality';
 import { ISOSensitivity } from './ISOSensitivity';
+import { LiveViewImage } from './LiveViewImage';
 import { ObjectEvent } from './ObjectEvent';
 import { Option } from './Option';
 import { OutputDevice } from './OutputDevice';
@@ -32,6 +33,7 @@ export * from './FileFormat';
 export * from './Flag';
 export * from './ImageQuality';
 export * from './ISOSensitivity';
+export * from './LiveViewImage';
 export * from './ObjectEvent';
 export * from './Option';
 export * from './OutputDevice';
@@ -78,6 +80,7 @@ const CameraApi = {
     Flag,
     ImageQuality,
     ISOSensitivity,
+    LiveViewImage,
     ObjectEvent,
     Option,
     OutputDevice,

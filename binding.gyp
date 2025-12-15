@@ -1,7 +1,8 @@
 {
     "variables": {
-        "edsdk_version": "131800",
-        "edsdk_directory%": "EDSDK"
+        "edsdk_version": "131712CD",
+        "edsdk_directory%": "EDSDK",
+        "openssl_fips": 0
     },
     "defines": [
         "NAPI_VERSION=<(napi_build_version)",
