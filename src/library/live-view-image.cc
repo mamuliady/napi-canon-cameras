@@ -35,6 +35,16 @@ namespace CameraApi {
         if (error == EDS_ERR_OK) {
             error = EdsDownloadEvfImage(edsCameraRef, imageRef_);
         }
+        if (error != EDS_ERR_OK) {
+            if (imageRef_ != nullptr) {
+                EdsRelease(imageRef_);
+                imageRef_ = nullptr;
+            }
+            if (streamRef_ != nullptr) {
+                EdsRelease(streamRef_);
+                streamRef_ = nullptr;
+            }
+        }
         return error;
     }
 
@@ -50,35 +60,46 @@ namespace CameraApi {
     }
 
     Napi::Value LiveViewImage::GetDataURL(const Napi::CallbackInfo &info) {
-        EdsUInt64 imageDataLength;
-        int imageStringLength;
-        unsigned char *imageData;
-        std::string encodedData = "data:image/jpeg;base64,";
+        if (streamRef_ == nullptr) {
+            return info.Env().Undefined();
+        }
+        EdsUInt64 imageDataLength = 0;
+        int imageStringLength = 0;
+        unsigned char *imageData = nullptr;
 
         EdsGetLength(streamRef_, &imageDataLength);
         if (imageDataLength > 0) {
             EdsGetPointer(streamRef_, (EdsVoid **) &imageData);
-
-            char *imageString = base64(imageData, (int) imageDataLength, &imageStringLength);
-            encodedData.append(imageString);
-            free(imageString);
-            return Napi::String::New(info.Env(), encodedData);
+            if (imageData != nullptr) {
+                char *imageString = base64(imageData, (int) imageDataLength, &imageStringLength);
+                if (imageString != nullptr) {
+                    std::string encodedData = "data:image/jpeg;base64,";
+                    encodedData.append(imageString, imageStringLength);
+                    free(imageString);
+                    return Napi::String::New(info.Env(), encodedData);
+                }
+            }
         }
         return info.Env().Undefined();
     }
 
     Napi::Value LiveViewImage::GetJPEGBuffer(const Napi::CallbackInfo &info) {
+        if (streamRef_ == nullptr) {
+            return Napi::Buffer<unsigned char>::New(info.Env(), 0);
+        }
         EdsUInt64 imageDataLength = 0;
         unsigned char *imageData = nullptr;
 
         EdsGetLength(streamRef_, &imageDataLength);
         if (imageDataLength > 0) {
             EdsGetPointer(streamRef_, (EdsVoid **) &imageData);
-            return Napi::Buffer<unsigned char>::Copy(
-                info.Env(),
-                imageData,
-                static_cast<size_t>(imageDataLength)
-            );
+            if (imageData != nullptr) {
+                return Napi::Buffer<unsigned char>::Copy(
+                    info.Env(),
+                    imageData,
+                    static_cast<size_t>(imageDataLength)
+                );
+            }
         }
 
         return Napi::Buffer<unsigned char>::New(info.Env(), 0);
@@ -86,16 +107,20 @@ namespace CameraApi {
 
     Napi::Value LiveViewImage::GetCoordinateSystem(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
+        if (imageRef_ == nullptr) {
+            return env.Undefined();
+        }
         EdsSize coordinateSystem;
-        EdsError error;
-        error = EdsGetPropertyData(
+        EdsError error = EdsGetPropertyData(
             imageRef_,
             kEdsPropID_Evf_CoordinateSystem,
             0,
             sizeof (coordinateSystem),
             &coordinateSystem
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         Napi::Object size = Napi::Object::New(env);
         size.Set("width", Napi::Number::New(env, coordinateSystem.width));
         size.Set("height", Napi::Number::New(env, coordinateSystem.height));
@@ -104,29 +129,39 @@ namespace CameraApi {
 
     Napi::Value LiveViewImage::GetHistogram(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
-        EdsError error;
+        if (imageRef_ == nullptr) {
+            return env.Undefined();
+        }
         Napi::Uint32Array y = Napi::TypedArrayOf<uint32_t>::New(env, 256);
         Napi::Uint32Array r = Napi::TypedArrayOf<uint32_t>::New(env, 256);
         Napi::Uint32Array g = Napi::TypedArrayOf<uint32_t>::New(env, 256);
         Napi::Uint32Array b = Napi::TypedArrayOf<uint32_t>::New(env, 256);
         auto propertySize = 256 * sizeof(EdsUInt32);
 
-        error = EdsGetPropertyData(
-            imageRef_, kEdsPropID_Evf_HistogramY, 0, propertySize,y.Data()
+        EdsError error = EdsGetPropertyData(
+            imageRef_, kEdsPropID_Evf_HistogramY, 0, propertySize, y.Data()
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         error = EdsGetPropertyData(
-            imageRef_, kEdsPropID_Evf_HistogramR, 0, propertySize,r.Data()
+            imageRef_, kEdsPropID_Evf_HistogramR, 0, propertySize, r.Data()
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         error = EdsGetPropertyData(
-            imageRef_, kEdsPropID_Evf_HistogramG, 0, propertySize,g.Data()
+            imageRef_, kEdsPropID_Evf_HistogramG, 0, propertySize, g.Data()
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         error = EdsGetPropertyData(
-            imageRef_, kEdsPropID_Evf_HistogramB, 0, propertySize,b.Data()
+            imageRef_, kEdsPropID_Evf_HistogramB, 0, propertySize, b.Data()
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         Napi::Object histogram = Napi::Object::New(env);
         histogram.Set("y", y);
         histogram.Set("r", r);
@@ -137,30 +172,39 @@ namespace CameraApi {
 
     Napi::Value LiveViewImage::GetHistogramStatus(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
-        EdsError error;
-        EdsUInt32 status;
-        error = EdsGetPropertyData(
+        if (imageRef_ == nullptr) {
+            return Option::NewInstance(env, kEdsPropID_Evf_HistogramStatus, 0);
+        }
+        EdsUInt32 status = 0;
+        EdsError error = EdsGetPropertyData(
             imageRef_,
             kEdsPropID_Evf_HistogramStatus,
             0,
             sizeof (status),
             &status
         );
+        if (error != EDS_ERR_OK) {
+            status = 0;
+        }
         return Option::NewInstance(env, kEdsPropID_Evf_HistogramStatus, status);
     }
 
     Napi::Value LiveViewImage::GetPosition(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
+        if (imageRef_ == nullptr) {
+            return env.Undefined();
+        }
         EdsPoint imagePosition;
-        EdsError error;
-        error = EdsGetPropertyData(
+        EdsError error = EdsGetPropertyData(
             imageRef_,
             kEdsPropID_Evf_ImagePosition,
             0,
             sizeof (imagePosition),
             &imagePosition
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         Napi::Object position = Napi::Object::New(env);
         position.Set("left", Napi::Number::New(env, imagePosition.x));
         position.Set("top", Napi::Number::New(env, imagePosition.y));
@@ -170,16 +214,20 @@ namespace CameraApi {
 
     Napi::Value LiveViewImage::GetVisibleArea(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
+        if (imageRef_ == nullptr) {
+            return env.Undefined();
+        }
         EdsRect visibleArea;
-        EdsError error;
-        error = EdsGetPropertyData(
+        EdsError error = EdsGetPropertyData(
             imageRef_,
             kEdsPropID_Evf_VisibleRect,
             0,
             sizeof (visibleArea),
             &visibleArea
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         Napi::Object area = Napi::Object::New(env);
         area.Set("left", Napi::Number::New(env, visibleArea.point.x));
         area.Set("top", Napi::Number::New(env, visibleArea.point.y));
@@ -190,31 +238,39 @@ namespace CameraApi {
 
     Napi::Value LiveViewImage::GetZoom(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
-        EdsUInt32 zoomFactor;
-        EdsError error;
-        error = EdsGetPropertyData(
+        if (imageRef_ == nullptr) {
+            return Option::NewInstance(env, kEdsPropID_Evf_Zoom, 0);
+        }
+        EdsUInt32 zoomFactor = 0;
+        EdsError error = EdsGetPropertyData(
             imageRef_,
             kEdsPropID_Evf_Zoom,
             0,
             sizeof (zoomFactor),
             &zoomFactor
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            zoomFactor = 0;
+        }
         return Option::NewInstance(env, kEdsPropID_Evf_Zoom, zoomFactor);
     }
 
     Napi::Value LiveViewImage::GetZoomArea(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
+        if (imageRef_ == nullptr) {
+            return env.Undefined();
+        }
         EdsRect zoomArea;
-        EdsError error;
-        error = EdsGetPropertyData(
+        EdsError error = EdsGetPropertyData(
             imageRef_,
             kEdsPropID_Evf_ZoomRect,
             0,
             sizeof (zoomArea),
             &zoomArea
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         Napi::Object zoom = Napi::Object::New(env);
         zoom.Set("left", Napi::Number::New(env, zoomArea.point.x));
         zoom.Set("top", Napi::Number::New(env, zoomArea.point.y));
@@ -225,16 +281,20 @@ namespace CameraApi {
 
     Napi::Value LiveViewImage::GetZoomPosition(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
+        if (imageRef_ == nullptr) {
+            return env.Undefined();
+        }
         EdsPoint zoomPosition;
-        EdsError error;
-        error = EdsGetPropertyData(
+        EdsError error = EdsGetPropertyData(
             imageRef_,
             kEdsPropID_Evf_ZoomPosition,
             0,
             sizeof (zoomPosition),
             &zoomPosition
         );
-        ApiError::ThrowIfFailed(env, error);
+        if (error != EDS_ERR_OK) {
+            return env.Undefined();
+        }
         Napi::Object zoom = Napi::Object::New(env);
         zoom.Set("left", Napi::Number::New(env, zoomPosition.x));
         zoom.Set("top", Napi::Number::New(env, zoomPosition.y));

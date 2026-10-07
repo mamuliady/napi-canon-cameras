@@ -111,14 +111,22 @@ namespace CameraApi {
     }
 
     Camera::~Camera() {
-        if (isConnected_) {
-            disconnect();
+        if (edsCamera_) {
+            EdsSetCameraStateEventHandler(edsCamera_, kEdsStateEvent_All, nullptr, this);
+            EdsSetPropertyEventHandler(edsCamera_, kEdsPropertyEvent_All, nullptr, this);
+            EdsSetObjectEventHandler(edsCamera_, kEdsObjectEvent_All, nullptr, this);
+            if (isConnected_) {
+                stopLiveView();
+                isConnected_ = false;
+                EdsCloseSession(edsCamera_);
+            }
+            EdsRelease(edsCamera_);
+            edsCamera_ = nullptr;
         }
-        EdsSetCameraStateEventHandler(edsCamera_, kEdsStateEvent_All, nullptr, this);
-        EdsSetPropertyEventHandler(edsCamera_, kEdsStateEvent_All, nullptr, this);
-        EdsSetObjectEventHandler(edsCamera_, kEdsStateEvent_All, nullptr, this);
-        EdsRelease(edsCamera_);
-        edsCamera_ = nullptr;
+        if (tsEmit_) {
+            tsEmit_.Release();
+            tsEmit_ = nullptr;
+        }
     }
 
     Napi::ThreadSafeFunction &Camera::getEventEmit() {
@@ -130,6 +138,10 @@ namespace CameraApi {
     }
 
     void Camera::attachEventEmit(const Napi::Function &emit) {
+        if (tsEmit_) {
+            tsEmit_.Release();
+            tsEmit_ = nullptr;
+        }
         tsEmit_ = Napi::ThreadSafeFunction::New(
             emit.Env(),
             emit,  // JavaScript function called asynchronously
@@ -140,6 +152,13 @@ namespace CameraApi {
                 //nativeThread.join();
             }
         );
+    }
+
+    void Camera::detachEventEmit() {
+        if (tsEmit_) {
+            tsEmit_.Release();
+            tsEmit_ = nullptr;
+        }
     }
 
     CameraReference Camera::create(const EdsCameraRef &edsCamera) {
@@ -194,9 +213,9 @@ namespace CameraApi {
     }
 
     void Camera::emitCameraEvent(const std::string &eventName) {
-        DeviceEventData *eventDataPtr;
-        eventDataPtr = new DeviceEventData;
-        eventDataPtr->camera = this->shared_from_this();
+        if (!this->hasEventEmit() && !CameraBrowser::instance()->hasEventEmit()) {
+            return;
+        }
 
         auto jsCallback = [eventName](
             Napi::Env env, Napi::Function jsCallback, DeviceEventData *dataPtr
@@ -213,12 +232,16 @@ namespace CameraApi {
         };
 
         if (this->hasEventEmit()) {
-            this->getEventEmit().NonBlockingCall(eventDataPtr, jsCallback);
+            DeviceEventData *dataPtr = new DeviceEventData{this->shared_from_this()};
+            if (this->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                delete dataPtr;
+            }
         }
         if (CameraBrowser::instance()->hasEventEmit()) {
-            CameraBrowser::instance()->getEventEmit().NonBlockingCall(
-                eventDataPtr, jsCallback
-            );
+            DeviceEventData *dataPtr = new DeviceEventData{this->shared_from_this()};
+            if (CameraBrowser::instance()->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                delete dataPtr;
+            }
         }
     }
 
@@ -304,16 +327,18 @@ namespace CameraApi {
     }
 
     bool Camera::updateLiveViewStatus() {
-        EdsUInt32 device;
+        if (!edsCamera_ || !isConnected_) {
+            return hasActiveLiveView_;
+        }
+        EdsUInt32 device = 0;
         EdsGetPropertyData(edsCamera_, kEdsPropID_Evf_OutputDevice, 0, sizeof(device), &device);
         bool activeLiveView = ((device & kEdsEvfOutputDevice_PC) == kEdsEvfOutputDevice_PC);
         if (hasActiveLiveView_ != activeLiveView) {
             hasActiveLiveView_ = activeLiveView;
 
-            LiveViewEventData *eventDataPtr;
-            eventDataPtr = new LiveViewEventData;
-            eventDataPtr->camera = this->shared_from_this();
-            eventDataPtr->isActive = activeLiveView;
+            if (!hasEventEmit() && !CameraBrowser::instance()->hasEventEmit()) {
+                return hasActiveLiveView_;
+            }
 
             auto jsCallback = [](
                 Napi::Env env, Napi::Function jsCallback, LiveViewEventData *dataPtr
@@ -333,12 +358,16 @@ namespace CameraApi {
             };
 
             if (hasEventEmit()) {
-                getEventEmit().NonBlockingCall(eventDataPtr, jsCallback);
+                LiveViewEventData *dataPtr = new LiveViewEventData{this->shared_from_this(), activeLiveView};
+                if (getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                    delete dataPtr;
+                }
             }
             if (CameraBrowser::instance()->hasEventEmit()) {
-                CameraBrowser::instance()->getEventEmit().NonBlockingCall(
-                    eventDataPtr, jsCallback
-                );
+                LiveViewEventData *dataPtr = new LiveViewEventData{this->shared_from_this(), activeLiveView};
+                if (CameraBrowser::instance()->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                    delete dataPtr;
+                }
             }
         }
         return hasActiveLiveView_;
@@ -388,7 +417,15 @@ namespace CameraApi {
         EdsStateEvent inEvent, EdsUInt32 inEventData, EdsVoid *inContext
     ) {
         auto *c = (Camera *) inContext;
-        CameraReference camera = c->shared_from_this();
+        if (!c) {
+            return EDS_ERR_OK;
+        }
+        CameraReference camera;
+        try {
+            camera = c->shared_from_this();
+        } catch (...) {
+            return EDS_ERR_OK;
+        }
 
         switch (inEvent) {
             case kEdsStateEvent_Shutdown:
@@ -402,10 +439,9 @@ namespace CameraApi {
                     break;
                 }
             default:
-                StateEventData *eventDataPtr;
-                eventDataPtr = new StateEventData;
-                eventDataPtr->camera = camera;
-                eventDataPtr->eventID = inEvent;
+                if (!camera->hasEventEmit() && !CameraBrowser::instance()->hasEventEmit()) {
+                    break;
+                }
 
                 auto jsCallback = [](
                     Napi::Env env, Napi::Function jsCallback, StateEventData *dataPtr
@@ -423,12 +459,16 @@ namespace CameraApi {
                 };
 
                 if (camera->hasEventEmit()) {
-                    camera->getEventEmit().NonBlockingCall(eventDataPtr, jsCallback);
+                    StateEventData *dataPtr = new StateEventData{camera, inEvent};
+                    if (camera->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                        delete dataPtr;
+                    }
                 }
                 if (CameraBrowser::instance()->hasEventEmit()) {
-                    CameraBrowser::instance()->getEventEmit().NonBlockingCall(
-                        eventDataPtr, jsCallback
-                    );
+                    StateEventData *dataPtr = new StateEventData{camera, inEvent};
+                    if (CameraBrowser::instance()->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                        delete dataPtr;
+                    }
                 }
                 break;
         }
@@ -439,19 +479,24 @@ namespace CameraApi {
         EdsPropertyEvent inEvent, EdsUInt32 inPropertyID, EdsUInt32 inParam, EdsVoid *inContext
     ) {
         auto *c = (Camera *) inContext;
-        CameraReference camera = c->shared_from_this();
-
-        PropertyEventData *eventDataPtr;
-        eventDataPtr = new PropertyEventData;
-        eventDataPtr->camera = camera;
-        eventDataPtr->eventID = inEvent;
-        eventDataPtr->propertyID = inPropertyID;
-        eventDataPtr->specifier = inParam;
+        if (!c) {
+            return EDS_ERR_OK;
+        }
+        CameraReference camera;
+        try {
+            camera = c->shared_from_this();
+        } catch (...) {
+            return EDS_ERR_OK;
+        }
 
         switch (inPropertyID) {
             case kEdsPropID_Evf_OutputDevice:
                 camera->updateLiveViewStatus();
                 break;
+        }
+
+        if (!camera->hasEventEmit() && !CameraBrowser::instance()->hasEventEmit()) {
+            return EDS_ERR_OK;
         }
 
         auto jsCallback = [](Napi::Env env, Napi::Function jsCallback, PropertyEventData *dataPtr) {
@@ -481,12 +526,16 @@ namespace CameraApi {
         };
 
         if (camera->hasEventEmit()) {
-            camera->getEventEmit().NonBlockingCall(eventDataPtr, jsCallback);
+            PropertyEventData *dataPtr = new PropertyEventData{camera, inEvent, inPropertyID, inParam};
+            if (camera->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                delete dataPtr;
+            }
         }
         if (CameraBrowser::instance()->hasEventEmit()) {
-            CameraBrowser::instance()->getEventEmit().NonBlockingCall(
-                eventDataPtr, jsCallback
-            );
+            PropertyEventData *dataPtr = new PropertyEventData{camera, inEvent, inPropertyID, inParam};
+            if (CameraBrowser::instance()->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                delete dataPtr;
+            }
         }
 
         return EDS_ERR_OK;
@@ -496,96 +545,110 @@ namespace CameraApi {
         EdsObjectEvent inEvent, EdsBaseRef inRef, EdsVoid *inContext
     ) {
         auto *c = (Camera *) inContext;
-        CameraReference camera = c->shared_from_this();
-
-        ObjectEventData *eventDataPtr;
-        eventDataPtr = new ObjectEventData;
-        eventDataPtr->camera = camera;
-        eventDataPtr->eventID = inEvent;
-        eventDataPtr->objectRef = inRef;
-
-        try {
-            auto jsCallback = [](
-                Napi::Env env, Napi::Function jsCallback, ObjectEventData *dataPtr
-            ) {
-                EdsError error = EDS_ERR_OK;
-                Napi::Object event = Napi::Object::New(env);
-                event.Set("camera", CameraWrap::NewInstance(env, dataPtr->camera));
-                switch (dataPtr->eventID) {
-                    case kEdsObjectEvent_DirItemRequestTransferDT:
-                        event.Set(
-                            "file",
-                            CameraFile::NewInstance(env, (EdsDirectoryItemRef) dataPtr->objectRef)
-                        );
-                        jsCallback.Call(
-                            {
-                                Napi::String::New(env, EventName_DownloadRequest),
-                                event
-                            }
-                        );
-                        break;
-                    case kEdsObjectEvent_DirItemRequestTransfer:
-                        event.Set(
-                            "file",
-                            CameraFile::NewInstance(env, (EdsDirectoryItemRef) dataPtr->objectRef)
-                        );
-                        jsCallback.Call(
-                            {
-                                Napi::String::New(env, EventName_DownloadRequest),
-                                event
-                            }
-                        );
-                        break;
-                    case kEdsObjectEvent_DirItemCreated:
-                        EdsDirectoryItemInfo entryInfo;
-                        error = EdsGetDirectoryItemInfo(dataPtr->objectRef, &entryInfo);
-                        if (error == EDS_ERR_OK) {
-                            if (entryInfo.isFolder) {
-                                event.Set(
-                                    "directory", Directory::NewInstance(env, dataPtr->objectRef)
-                                );
-                                jsCallback.Call(
-                                    {
-                                        Napi::String::New(env, EventName_DirectoryCreate),
-                                        event
-                                    }
-                                );
-                            } else {
-                                event.Set(
-                                    "file", CameraFile::NewInstance(env, dataPtr->objectRef)
-                                );
-                                jsCallback.Call(
-                                    {
-                                        Napi::String::New(env, EventName_FileCreate),
-                                        event
-                                    }
-                                );
-                            }
-                        }
-                        break;
-
-                    default:
-                        event.Set("objectEvent", ObjectEvent::NewInstance(env, dataPtr->eventID));
-                        jsCallback.Call(
-                            {
-                                Napi::String::New(env, EventName_ObjectChange),
-                                event
-                            }
-                        );
-                        break;
-                }
-                EdsRelease(dataPtr->objectRef);
-                delete dataPtr;
-            };
-            if (camera->hasEventEmit()) {
-                camera->getEventEmit().NonBlockingCall(eventDataPtr, jsCallback);
-            }
-            if (CameraBrowser::instance()->hasEventEmit()) {
-                CameraBrowser::instance()->getEventEmit().NonBlockingCall(eventDataPtr, jsCallback);
-            }
-        } catch (...) {
-            EdsRelease(inRef);
+        if (!c) {
+            return EDS_ERR_OK;
         }
+        CameraReference camera;
+        try {
+            camera = c->shared_from_this();
+        } catch (...) {
+            return EDS_ERR_OK;
+        }
+
+        if (!camera->hasEventEmit() && !CameraBrowser::instance()->hasEventEmit()) {
+            return EDS_ERR_OK;
+        }
+
+        auto jsCallback = [](
+            Napi::Env env, Napi::Function jsCallback, ObjectEventData *dataPtr
+        ) {
+            EdsError error = EDS_ERR_OK;
+            Napi::Object event = Napi::Object::New(env);
+            event.Set("camera", CameraWrap::NewInstance(env, dataPtr->camera));
+            switch (dataPtr->eventID) {
+                case kEdsObjectEvent_DirItemRequestTransferDT:
+                case kEdsObjectEvent_DirItemRequestTransfer:
+                    event.Set(
+                        "file",
+                        CameraFile::NewInstance(env, (EdsDirectoryItemRef) dataPtr->objectRef)
+                    );
+                    jsCallback.Call(
+                        {
+                            Napi::String::New(env, EventName_DownloadRequest),
+                            event
+                        }
+                    );
+                    break;
+                case kEdsObjectEvent_DirItemCreated:
+                    EdsDirectoryItemInfo entryInfo;
+                    error = EdsGetDirectoryItemInfo(dataPtr->objectRef, &entryInfo);
+                    if (error == EDS_ERR_OK) {
+                        if (entryInfo.isFolder) {
+                            event.Set(
+                                "directory", Directory::NewInstance(env, dataPtr->objectRef)
+                            );
+                            jsCallback.Call(
+                                {
+                                    Napi::String::New(env, EventName_DirectoryCreate),
+                                    event
+                                }
+                            );
+                        } else {
+                            event.Set(
+                                "file", CameraFile::NewInstance(env, dataPtr->objectRef)
+                            );
+                            jsCallback.Call(
+                                {
+                                    Napi::String::New(env, EventName_FileCreate),
+                                    event
+                                }
+                            );
+                        }
+                    }
+                    break;
+
+                default:
+                    event.Set("objectEvent", ObjectEvent::NewInstance(env, dataPtr->eventID));
+                    jsCallback.Call(
+                        {
+                            Napi::String::New(env, EventName_ObjectChange),
+                            event
+                        }
+                    );
+                    break;
+            }
+            if (dataPtr->objectRef) {
+                EdsRelease(dataPtr->objectRef);
+                dataPtr->objectRef = nullptr;
+            }
+            delete dataPtr;
+        };
+
+        if (camera->hasEventEmit()) {
+            if (inRef) {
+                EdsRetain(inRef);
+            }
+            ObjectEventData *dataPtr = new ObjectEventData{camera, inEvent, inRef};
+            if (camera->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                if (inRef) {
+                    EdsRelease(inRef);
+                }
+                delete dataPtr;
+            }
+        }
+        if (CameraBrowser::instance()->hasEventEmit()) {
+            if (inRef) {
+                EdsRetain(inRef);
+            }
+            ObjectEventData *dataPtr = new ObjectEventData{camera, inEvent, inRef};
+            if (CameraBrowser::instance()->getEventEmit().NonBlockingCall(dataPtr, jsCallback) != napi_ok) {
+                if (inRef) {
+                    EdsRelease(inRef);
+                }
+                delete dataPtr;
+            }
+        }
+
         return EDS_ERR_OK;
     }
 
@@ -681,6 +744,8 @@ namespace CameraApi {
     Napi::Value CameraWrap::SetEventHandler(const Napi::CallbackInfo &info) {
         if (info.Length() > 0 && info[0].IsFunction()) {
             camera_->attachEventEmit(info[0].As<Napi::Function>());
+        } else if (info.Length() > 0 && (info[0].IsNull() || info[0].IsUndefined())) {
+            camera_->detachEventEmit();
         }
         return info.Env().Undefined();
     }
@@ -789,11 +854,14 @@ namespace CameraApi {
 
     Napi::Value CameraWrap::GetLiveViewImage(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
-        std::string image;
-        // if (camera_->isLiveViewActive()) {
-            return LiveViewImage::NewInstance(info.Env(), camera_->getEdsReference());
-        // }
-        return info.Env().Undefined();
+        if (!camera_ || !camera_->isConnected()) {
+            return env.Undefined();
+        }
+        try {
+            return LiveViewImage::NewInstance(env, camera_->getEdsReference());
+        } catch (...) {
+            return env.Undefined();
+        }
     }
 
     Napi::Value CameraWrap::GetVolumes(const Napi::CallbackInfo &info) {

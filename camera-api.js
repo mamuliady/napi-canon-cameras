@@ -72,16 +72,25 @@ AddOn.wrapCamera = wrapCamera;
 
 AddOn.watchCameras = (timeout) => {
     let running = true;
+    const interval = (typeof timeout === 'number' && timeout >= 0) ? timeout : 100;
     const stop = () => {
         running = false;
     };
     const watch = async () => {
         while (running) {
-            AddOn.cameraBrowser.triggerEvents();
-            await new Promise(resolve => setTimeout(resolve, timeout));
+            try {
+                if (AddOn.cameraBrowser && typeof AddOn.cameraBrowser.triggerEvents === 'function') {
+                    AddOn.cameraBrowser.triggerEvents();
+                }
+            } catch (err) {
+                // Ignore transient trigger errors to prevent crashing the event loop
+            }
+            await new Promise(resolve => setTimeout(resolve, interval));
         }
     };
-    watch().finally();
+    watch().catch((err) => {
+        return err;
+    });
     return stop;
 };
 

@@ -127,17 +127,21 @@ namespace CameraApi {
                 );
                 value = Napi::Number::New(env, uint32_value);
                 break;
-            case kEdsDataType_String:
-                EdsChar char_value[EDS_MAX_NAME];
+            case kEdsDataType_String: {
+                size_t bufSize = (dataSize > EDS_MAX_NAME) ? (dataSize + 1) : EDS_MAX_NAME;
+                std::vector<char> char_value(bufSize, 0);
                 ApiError::ThrowIfFailed(
                     env,
                     EdsGetPropertyData(
-                        edsCamera_, propertyIdentifier_, propertySpecifier_, EDS_MAX_NAME,
-                        &char_value
+                        edsCamera_, propertyIdentifier_, propertySpecifier_,
+                        dataSize > 0 ? dataSize : bufSize,
+                        char_value.data()
                     )
                 );
-                value = Napi::String::New(env, char_value);
+                char_value[bufSize - 1] = '\0';
+                value = Napi::String::New(env, char_value.data());
                 break;
+            }
             case kEdsDataType_Time:
                 value = ReadTimeValue(info, dataSize);
                 break;
@@ -230,19 +234,21 @@ namespace CameraApi {
     ) {
         EdsUInt32 itemSize = sizeof(T);
         Napi::Env env = info.Env();
-        EdsUInt32 numElements = dataSize / itemSize;
-        auto *items = new T[numElements];
+        EdsUInt32 numElements = itemSize > 0 ? (dataSize / itemSize) : 0;
         Napi::Array value = Napi::Array::New(env, numElements);
+        if (numElements == 0) {
+            return value;
+        }
+        std::vector<T> items(numElements);
         ApiError::ThrowIfFailed(
             env,
             EdsGetPropertyData(
-                edsCamera_, propertyIdentifier_, propertySpecifier_, dataSize, items
+                edsCamera_, propertyIdentifier_, propertySpecifier_, dataSize, items.data()
             )
         );
         for (EdsUInt32 i = 0; i < numElements; i++) {
             value.Set(i, Napi::Number::New(env, items[i]));
         }
-        delete[] items;
 
         return value;
     }
@@ -275,11 +281,14 @@ namespace CameraApi {
         Napi::Env env = info.Env();
         Napi::Array values = Napi::Array::New(env);
         EdsPropertyDesc propertyDescription;
+        memset(&propertyDescription, 0, sizeof(propertyDescription));
 
-        ApiError::ThrowIfFailed(
-            env, EdsGetPropertyDesc(
-                edsCamera_, propertyIdentifier_, &propertyDescription
-            ));
+        EdsError descError = EdsGetPropertyDesc(
+            edsCamera_, propertyIdentifier_, &propertyDescription
+        );
+        if (descError != EDS_ERR_OK) {
+            return values;
+        }
         for (int i = 0; i < propertyDescription.numElements; ++i) {
             switch (propertyIdentifier_) {
                 case kEdsPropID_Av:
@@ -419,7 +428,7 @@ namespace CameraApi {
                     break;
             }
         } else {
-            ApiError::ThrowIfFailed(env, EDS_ERR_OK);
+            ApiError::ThrowIfFailed(env, error);
         }
     }
 

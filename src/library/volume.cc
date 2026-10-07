@@ -52,11 +52,11 @@ namespace CameraApi {
     }
 
     Napi::Value Volume::GetMaximumCapacity(const Napi::CallbackInfo &info) {
-        return Napi::Number::New(info.Env(), (int) volumeInfo_.maxCapacity);
+        return Napi::Number::New(info.Env(), (double) volumeInfo_.maxCapacity);
     }
 
     Napi::Value Volume::GetFreeCapacity(const Napi::CallbackInfo &info) {
-        return Napi::Number::New(info.Env(), (int) volumeInfo_.freeSpaceInBytes);
+        return Napi::Number::New(info.Env(), (double) volumeInfo_.freeSpaceInBytes);
     }
 
     Napi::Value Volume::GetLength(const Napi::CallbackInfo &info) {
@@ -76,7 +76,7 @@ namespace CameraApi {
         error = EdsGetChildCount(volumeRef_, &count);
         ApiError::ThrowIfFailed(env, error);
         for (EdsUInt32 idx = 0; idx < count; idx++) {
-            EdsDirectoryItemRef entryRef;
+            EdsDirectoryItemRef entryRef = nullptr;
             error = EdsGetChildAtIndex(volumeRef_, idx, &entryRef);
             ApiError::ThrowIfFailed(env, error);
 
@@ -86,12 +86,17 @@ namespace CameraApi {
                 EdsRelease(entryRef);
                 ApiError::Throw(env, error);
             }
-            entries.Set(
-                idx,
-                entryInfo.isFolder
-                  ? Directory::NewInstance(env, entryRef)
-                  : CameraFile::NewInstance(env, entryRef)
-            );
+            try {
+                entries.Set(
+                    idx,
+                    entryInfo.isFolder
+                      ? Directory::NewInstance(env, entryRef)
+                      : CameraFile::NewInstance(env, entryRef)
+                );
+            } catch (...) {
+                EdsRelease(entryRef);
+                throw;
+            }
             EdsRelease(entryRef);
         }
         return entries;
@@ -104,7 +109,7 @@ namespace CameraApi {
         json.Set("length", GetLength(info));
         json.Set("storageType", GetStorageType(info));
         json.Set("isReadable", IsReadable(info));
-        json.Set("isWritable", IsReadable(info));
+        json.Set("isWritable", IsWritable(info));
         json.Set("maximumCapacity", GetMaximumCapacity(info));
         json.Set("freeCapacity", GetFreeCapacity(info));
         return json;

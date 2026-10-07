@@ -31,8 +31,13 @@ namespace CameraApi {
             void removeCamera(const CameraReference &camera);
 
             void attachEventEmit(const Napi::Function &emit);
+            void detachEventEmit();
 
             bool hasEventEmit();
+
+            inline bool isInitialized() const {
+                return isInitialized_;
+            }
 
             Napi::ThreadSafeFunction &getEventEmit();
 

@@ -93,13 +93,13 @@
     "category": "Property Read",
     "feature": "AvailableShots",
     "status": "PASS",
-    "details": "Value: 1106947 (0 allowed choices)"
+    "details": "Value: 0 (0 allowed choices)"
   },
   {
     "category": "Property Read",
     "feature": "BatteryLevel",
     "status": "PASS",
-    "details": "Value: 80 (0 allowed choices)"
+    "details": "Value: 50 (0 allowed choices)"
   },
   {
     "category": "Property Read",
@@ -171,7 +171,7 @@
     "category": "Property Read",
     "feature": "DateTime",
     "status": "PASS",
-    "details": "Value: {\"year\":2026,\"month\":10,\"day\":7,\"hour\":15,\"minute\":13,\"second\":9,\"milliseconds\":0} (0 allowed choices)"
+    "details": "Value: {\"year\":2026,\"month\":10,\"day\":7,\"hour\":15,\"minute\":44,\"second\":54,\"milliseconds\":0} (0 allowed choices)"
   },
   {
     "category": "Property Read",
@@ -621,7 +621,7 @@
     "category": "Property Read",
     "feature": "SaveTo",
     "status": "PASS",
-    "details": "Value: SaveTo.Host (1 allowed choices)"
+    "details": "Value: SaveTo.Camera (1 allowed choices)"
   },
   {
     "category": "Property Read",
@@ -651,7 +651,7 @@
     "category": "Property Read",
     "feature": "UTCTime",
     "status": "PASS",
-    "details": "Value: {\"year\":2026,\"month\":10,\"day\":7,\"hour\":15,\"minute\":13,\"second\":9,\"milliseconds\":0} (0 allowed choices)"
+    "details": "Value: {\"year\":2026,\"month\":10,\"day\":7,\"hour\":15,\"minute\":44,\"second\":54,\"milliseconds\":0} (0 allowed choices)"
   },
   {
     "category": "Property Read",
@@ -717,19 +717,19 @@
     "category": "LiveView",
     "feature": "image.getDataURL()",
     "status": "PASS",
-    "details": "Data URL length: 218787"
+    "details": "Data URL length: 222723"
   },
   {
     "category": "LiveView",
     "feature": "image.getBlob()",
     "status": "PASS",
-    "details": "Size: 164073 bytes, starts with 0xFFD8"
+    "details": "Size: 167025 bytes, starts with 0xFFD8"
   },
   {
     "category": "LiveView",
     "feature": "image.getJPEGBuffer()",
     "status": "PASS",
-    "details": "Size: 164073 bytes, starts with 0xFFD8"
+    "details": "Size: 167025 bytes, starts with 0xFFD8"
   },
   {
     "category": "LiveView",
@@ -795,7 +795,7 @@
     "category": "Capture",
     "feature": "file.downloadToPath()",
     "status": "PASS",
-    "details": "Downloaded to /Users/mamuliady/Documents/GitHub/napi-canon-cameras/examples/images/IMG_0001.JPG (2076624 bytes)"
+    "details": "Downloaded to /Users/mamuliady/Documents/GitHub/napi-canon-cameras/examples/images/IMG_0001.JPG (2204128 bytes)"
   },
   {
     "category": "Lifecycle",

@@ -46,11 +46,12 @@ namespace CameraApi {
                 return hasActiveLiveView_;
             }
 
-            inline Napi::Env Env() const {
-                return env_;
+            inline bool isConnected() const {
+                return isConnected_;
             }
 
             void attachEventEmit(const Napi::Function &emit);
+            void detachEventEmit();
 
         private:
             Napi::Env env_ = nullptr;

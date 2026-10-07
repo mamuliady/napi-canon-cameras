@@ -28,10 +28,17 @@ namespace CameraApi {
     }
 
     void CameraBrowser::triggerEvents() {
+        if (!instance()->isInitialized_) {
+            instance()->initialize();
+        }
         EdsGetEvent();
     }
 
     void CameraBrowser::attachEventEmit(const Napi::Function &emit) {
+        if (tsEmit_) {
+            tsEmit_.Release();
+            tsEmit_ = nullptr;
+        }
         tsEmit_ = Napi::ThreadSafeFunction::New(
             emit.Env(),
             emit,  // JavaScript function called asynchronously
@@ -42,6 +49,13 @@ namespace CameraApi {
                 //nativeThread.join();
             }
         );
+    }
+
+    void CameraBrowser::detachEventEmit() {
+        if (tsEmit_) {
+            tsEmit_.Release();
+            tsEmit_ = nullptr;
+        }
     }
 
     Napi::ThreadSafeFunction &CameraBrowser::getEventEmit() {
@@ -138,11 +152,10 @@ namespace CameraApi {
         CameraReference c = cameras_[it - cameras_.begin()];
 
         if (hasEventEmit()) {
-            DeviceEventData *eventDataPtr;
-            eventDataPtr = new DeviceEventData;
+            DeviceEventData *eventDataPtr = new DeviceEventData;
             eventDataPtr->camera = camera;
 
-            tsEmit_.NonBlockingCall(
+            napi_status status = tsEmit_.NonBlockingCall(
                 eventDataPtr,
                 [](Napi::Env env, Napi::Function jsCallback, DeviceEventData *dataPtr) {
                     Napi::Object event = Napi::Object::New(env);
@@ -156,6 +169,9 @@ namespace CameraApi {
                     delete dataPtr;
                 }
             );
+            if (status != napi_ok) {
+                delete eventDataPtr;
+            }
         }
 
         cameras_.erase(it);
@@ -166,7 +182,7 @@ namespace CameraApi {
 
         EdsError error = EdsGetCameraList(&edsCameraList);
         if (error != EDS_ERR_OK) {
-            EdsRelease(edsCameraList);
+            if (edsCameraList) EdsRelease(edsCameraList);
             return;
         }
 
@@ -201,14 +217,13 @@ namespace CameraApi {
         }
 
         for (auto edsCamera : currentRefs) {
-            if (
-                std::none_of(
-                    cameras_.begin(),
-                    cameras_.end(),
-                    [edsCamera](const CameraReference &c) { return c->getEdsReference() == edsCamera; }
-                )
-            ) {
+            bool isNew = std::none_of(
+                cameras_.begin(),
+                cameras_.end(),
+                [edsCamera](const CameraReference &c) { return c->getEdsReference() == edsCamera; }
+            );
 
+            if (isNew) {
                 CameraReference camera = nullptr;
                 try {
                     camera = Camera::create(edsCamera);
@@ -216,16 +231,14 @@ namespace CameraApi {
                     EdsRelease(edsCamera);
                     continue;
                 }
-                EdsRelease(edsCamera);
 
                 cameras_.push_back(camera);
 
                 if (hasEventEmit()) {
-                    DeviceEventData *eventDataPtr;
-                    eventDataPtr = new DeviceEventData;
+                    DeviceEventData *eventDataPtr = new DeviceEventData;
                     eventDataPtr->camera = camera;
 
-                    tsEmit_.NonBlockingCall(
+                    napi_status status = tsEmit_.NonBlockingCall(
                         eventDataPtr,
                         [](Napi::Env env, Napi::Function jsCallback, DeviceEventData *dataPtr) {
                             Napi::Object event = Napi::Object::New(env);
@@ -239,8 +252,12 @@ namespace CameraApi {
                             delete dataPtr;
                         }
                     );
+                    if (status != napi_ok) {
+                        delete eventDataPtr;
+                    }
                 }
             }
+            EdsRelease(edsCamera);
         }
         EdsRelease(edsCameraList);
     }
@@ -300,6 +317,8 @@ namespace CameraApi {
     Napi::Value CameraBrowserWrap::SetEventHandler(const Napi::CallbackInfo &info) {
         if (info.Length() > 0 && info[0].IsFunction()) {
             CameraBrowser::instance()->attachEventEmit(info[0].As<Napi::Function>());
+        } else if (info.Length() > 0 && (info[0].IsNull() || info[0].IsUndefined())) {
+            CameraBrowser::instance()->detachEventEmit();
         }
         return info.Env().Undefined();
     }
@@ -325,14 +344,13 @@ namespace CameraApi {
 
     Napi::Value CameraBrowserWrap::GetCameras(const Napi::CallbackInfo &info) {
         std::vector<CameraReference> cameras = CameraBrowser::instance()->getCameraList();
-        int cameraIndex = 0;
-        Napi::Array list = Napi::Array::New(info.Env());
-        for (CameraReference &camera : CameraBrowser::instance()->getCameraList()) {
+        uint32_t cameraIndex = 0;
+        Napi::Array list = Napi::Array::New(info.Env(), cameras.size());
+        for (const auto &camera : cameras) {
             list.Set(
-                cameraIndex,
+                cameraIndex++,
                 CameraWrap::NewInstance(info.Env(), camera)
             );
-            cameraIndex++;
         }
         return list;
     }

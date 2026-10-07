@@ -42,8 +42,8 @@ namespace CameraApi {
 
     Napi::Value CameraFile::Cancel(const Napi::CallbackInfo &info) {
         if (!isCanceled_) {
-            return ApiError::ThrowIfFailed(info.Env(), EdsDownloadCancel(edsDirectoryItem_));
             isCanceled_ = true;
+            return ApiError::ThrowIfFailed(info.Env(), EdsDownloadCancel(edsDirectoryItem_));
         }
         return info.Env().Undefined();
     }
@@ -57,7 +57,7 @@ namespace CameraApi {
     }
 
     Napi::Value CameraFile::GetSize(const Napi::CallbackInfo &info) {
-        return Napi::Number::New(info.Env(), (int)edsDirectoryItemInfo_.size);
+        return Napi::Number::New(info.Env(), (double)edsDirectoryItemInfo_.size);
     }
 
     Napi::Value CameraFile::GetLocalFile(const Napi::CallbackInfo &info) {
@@ -122,12 +122,14 @@ namespace CameraApi {
             }
             error = EdsDownload(edsDirectoryItem_, edsDirectoryItemInfo_.size, stream);
             if (error != EDS_ERR_OK) {
+                if (stream) EdsRelease(stream);
                 throw Napi::TypeError::New(
                     info.Env(), "Download failed."
                 );
             }
             error = EdsDownloadComplete(edsDirectoryItem_);
             if (error != EDS_ERR_OK) {
+                if (stream) EdsRelease(stream);
                 throw Napi::TypeError::New(
                     info.Env(), "Download could not be completed."
                 );
@@ -179,12 +181,14 @@ namespace CameraApi {
             }
             error = EdsDownload(edsDirectoryItem_, edsDirectoryItemInfo_.size, stream);
             if (error != EDS_ERR_OK) {
+                if (stream) EdsRelease(stream);
                 throw Napi::Error::New(
                     info.Env(), "Download failed."
                 );
             }
             error = EdsDownloadComplete(edsDirectoryItem_);
             if (error != EDS_ERR_OK) {
+                if (stream) EdsRelease(stream);
                 throw Napi::Error::New(
                     info.Env(), "Download could not be completed."
                 );
@@ -217,24 +221,27 @@ namespace CameraApi {
         }
         error = EdsDownload(edsDirectoryItem_, edsDirectoryItemInfo_.size, stream);
         if (error != EDS_ERR_OK) {
+            if (stream) EdsRelease(stream);
             throw Napi::Error::New(
                 info.Env(), "Download failed."
             );
         }
         error = EdsDownloadComplete(edsDirectoryItem_);
         if (error != EDS_ERR_OK) {
+            if (stream) EdsRelease(stream);
             throw Napi::Error::New(
                 info.Env(), "Download could not be completed."
             );
         }
         isDownloaded_ = true;
 
-        EdsUInt64 imageDataLength;
-        int imageStringLength;
-        unsigned char *imageData;
+        EdsUInt64 imageDataLength = 0;
+        int imageStringLength = 0;
+        unsigned char *imageData = nullptr;
 
         EdsGetLength(stream, &imageDataLength);
         if (imageDataLength <= 0) {
+            if (stream) EdsRelease(stream);
             throw Napi::Error::New(
                 info.Env(), "No image data."
             );
@@ -243,6 +250,12 @@ namespace CameraApi {
         EdsGetPointer(stream, (EdsVoid **) &imageData);
 
         char *imageString = base64(imageData, (int)imageDataLength, &imageStringLength);
+        if (!imageString) {
+            if (stream) EdsRelease(stream);
+            throw Napi::Error::New(
+                info.Env(), "Base64 encoding failed."
+            );
+        }
         Napi::String result = Napi::String::New(info.Env(), imageString, imageStringLength);
         free(imageString);
         if (stream != nullptr) {
@@ -264,23 +277,26 @@ namespace CameraApi {
         }
         error = EdsDownloadThumbnail(edsDirectoryItem_, stream);
         if (error != EDS_ERR_OK) {
+            if (stream) EdsRelease(stream);
             throw Napi::Error::New(
                 info.Env(), "Download failed."
             );
         }
         error = EdsDownloadComplete(edsDirectoryItem_);
         if (error != EDS_ERR_OK) {
+            if (stream) EdsRelease(stream);
             throw Napi::Error::New(
                 info.Env(), "Download could not be completed."
             );
         }
 
-        EdsUInt64 imageDataLength;
-        int imageStringLength;
-        unsigned char *imageData;
+        EdsUInt64 imageDataLength = 0;
+        int imageStringLength = 0;
+        unsigned char *imageData = nullptr;
 
         EdsGetLength(stream, &imageDataLength);
         if (imageDataLength <= 0) {
+            if (stream) EdsRelease(stream);
             throw Napi::Error::New(
                 info.Env(), "No image data."
             );
@@ -289,6 +305,12 @@ namespace CameraApi {
         EdsGetPointer(stream, (EdsVoid **) &imageData);
 
         char *imageString = base64(imageData, (int)imageDataLength, &imageStringLength);
+        if (!imageString) {
+            if (stream) EdsRelease(stream);
+            throw Napi::Error::New(
+                info.Env(), "Base64 encoding failed."
+            );
+        }
         Napi::String result = Napi::String::New(info.Env(), imageString, imageStringLength);
         free(imageString);
         if (stream != nullptr) {
@@ -324,7 +346,7 @@ namespace CameraApi {
                 InstanceMethod("downloadToPath", &CameraFile::DownloadToPath),
                 InstanceMethod("downloadToFile", &CameraFile::DownloadToFile),
                 InstanceMethod("downloadToString", &CameraFile::DownloadToString),
-                InstanceMethod("downloadThumbnailToString", &CameraFile::DownloadToString)
+                InstanceMethod("downloadThumbnailToString", &CameraFile::DownloadThumbnailToString)
             }
         );
         JSConstructor(&func);
