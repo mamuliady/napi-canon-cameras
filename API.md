@@ -14,6 +14,8 @@
 <dd></dd>
 <dt><a href="#ApiIdentifier">ApiIdentifier</a></dt>
 <dd></dd>
+<dt><a href="#FileFormat">FileFormat</a></dt>
+<dd></dd>
 <dt><a href="#Camera">Camera</a></dt>
 <dd></dd>
 <dt><a href="#CameraBrowser">CameraBrowser</a></dt>
@@ -30,9 +32,9 @@
 <dd></dd>
 <dt><a href="#Flag">Flag</a></dt>
 <dd></dd>
-<dt><a href="#ImageQuality">ImageQuality</a></dt>
-<dd></dd>
 <dt><a href="#ISOSensitivity">ISOSensitivity</a></dt>
+<dd></dd>
+<dt><a href="#ImageQuality">ImageQuality</a></dt>
 <dd></dd>
 <dt><a href="#LiveViewImage">LiveViewImage</a></dt>
 <dd></dd>
@@ -420,6 +422,7 @@
         * [.ID](#Aperture.ID) : <code>enum</code>
         * [.OneHalfValues](#Aperture.OneHalfValues) : <code>enum</code>
         * [.OneThirdValues](#Aperture.OneThirdValues) : <code>enum</code>
+        * [.AllValues](#Aperture.AllValues) : <code>enum</code>
         * [.forLabel(label)](#Aperture.forLabel) ⇒ [<code>Aperture</code>](#Aperture) \| <code>null</code>
 
 <a name="new_Aperture_new"></a>
@@ -626,6 +629,131 @@ Aperture property value
     </tr>  </tbody>
 </table>
 
+<a name="Aperture.AllValues"></a>
+
+## Aperture.AllValues : <code>enum</code>
+**Kind**: static enum of [<code>Aperture</code>](#Aperture)  
+**Read only**: true  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>8</td><td><code>number</code></td><td><code>1</code></td>
+    </tr><tr>
+    <td>11</td><td><code>number</code></td><td><code>1.1</code></td>
+    </tr><tr>
+    <td>12</td><td><code>number</code></td><td><code>1.2</code></td>
+    </tr><tr>
+    <td>13</td><td><code>number</code></td><td><code>1.2</code></td>
+    </tr><tr>
+    <td>16</td><td><code>number</code></td><td><code>1.4</code></td>
+    </tr><tr>
+    <td>19</td><td><code>number</code></td><td><code>1.6</code></td>
+    </tr><tr>
+    <td>20</td><td><code>number</code></td><td><code>1.8</code></td>
+    </tr><tr>
+    <td>21</td><td><code>number</code></td><td><code>1.8</code></td>
+    </tr><tr>
+    <td>24</td><td><code>number</code></td><td><code>2</code></td>
+    </tr><tr>
+    <td>27</td><td><code>number</code></td><td><code>2.2</code></td>
+    </tr><tr>
+    <td>28</td><td><code>number</code></td><td><code>2.5</code></td>
+    </tr><tr>
+    <td>29</td><td><code>number</code></td><td><code>2.5</code></td>
+    </tr><tr>
+    <td>32</td><td><code>number</code></td><td><code>2.8</code></td>
+    </tr><tr>
+    <td>35</td><td><code>number</code></td><td><code>3.2</code></td>
+    </tr><tr>
+    <td>36</td><td><code>number</code></td><td><code>3.5</code></td>
+    </tr><tr>
+    <td>37</td><td><code>number</code></td><td><code>3.5</code></td>
+    </tr><tr>
+    <td>40</td><td><code>number</code></td><td><code>4</code></td>
+    </tr><tr>
+    <td>43</td><td><code>number</code></td><td><code>4.5</code></td>
+    </tr><tr>
+    <td>44</td><td><code>number</code></td><td><code>4.5</code></td>
+    </tr><tr>
+    <td>45</td><td><code>number</code></td><td><code>5</code></td>
+    </tr><tr>
+    <td>48</td><td><code>number</code></td><td><code>5.6</code></td>
+    </tr><tr>
+    <td>51</td><td><code>number</code></td><td><code>6.3</code></td>
+    </tr><tr>
+    <td>52</td><td><code>number</code></td><td><code>6.7</code></td>
+    </tr><tr>
+    <td>53</td><td><code>number</code></td><td><code>7.1</code></td>
+    </tr><tr>
+    <td>56</td><td><code>number</code></td><td><code>8</code></td>
+    </tr><tr>
+    <td>59</td><td><code>number</code></td><td><code>9</code></td>
+    </tr><tr>
+    <td>60</td><td><code>number</code></td><td><code>9.5</code></td>
+    </tr><tr>
+    <td>61</td><td><code>number</code></td><td><code>10</code></td>
+    </tr><tr>
+    <td>64</td><td><code>number</code></td><td><code>11</code></td>
+    </tr><tr>
+    <td>67</td><td><code>number</code></td><td><code>13</code></td>
+    </tr><tr>
+    <td>68</td><td><code>number</code></td><td><code>13</code></td>
+    </tr><tr>
+    <td>69</td><td><code>number</code></td><td><code>14</code></td>
+    </tr><tr>
+    <td>72</td><td><code>number</code></td><td><code>16</code></td>
+    </tr><tr>
+    <td>75</td><td><code>number</code></td><td><code>18</code></td>
+    </tr><tr>
+    <td>76</td><td><code>number</code></td><td><code>19</code></td>
+    </tr><tr>
+    <td>77</td><td><code>number</code></td><td><code>20</code></td>
+    </tr><tr>
+    <td>80</td><td><code>number</code></td><td><code>22</code></td>
+    </tr><tr>
+    <td>83</td><td><code>number</code></td><td><code>25</code></td>
+    </tr><tr>
+    <td>84</td><td><code>number</code></td><td><code>27</code></td>
+    </tr><tr>
+    <td>85</td><td><code>number</code></td><td><code>29</code></td>
+    </tr><tr>
+    <td>88</td><td><code>number</code></td><td><code>32</code></td>
+    </tr><tr>
+    <td>91</td><td><code>number</code></td><td><code>36</code></td>
+    </tr><tr>
+    <td>92</td><td><code>number</code></td><td><code>38</code></td>
+    </tr><tr>
+    <td>93</td><td><code>number</code></td><td><code>40</code></td>
+    </tr><tr>
+    <td>96</td><td><code>number</code></td><td><code>45</code></td>
+    </tr><tr>
+    <td>99</td><td><code>number</code></td><td><code>51</code></td>
+    </tr><tr>
+    <td>100</td><td><code>number</code></td><td><code>54</code></td>
+    </tr><tr>
+    <td>101</td><td><code>number</code></td><td><code>57</code></td>
+    </tr><tr>
+    <td>104</td><td><code>number</code></td><td><code>64</code></td>
+    </tr><tr>
+    <td>107</td><td><code>number</code></td><td><code>72</code></td>
+    </tr><tr>
+    <td>108</td><td><code>number</code></td><td><code>76</code></td>
+    </tr><tr>
+    <td>109</td><td><code>number</code></td><td><code>80</code></td>
+    </tr><tr>
+    <td>112</td><td><code>number</code></td><td><code>91</code></td>
+    </tr><tr>
+    <td>133</td><td><code>number</code></td><td><code>3.4</code></td>
+    </tr>  </tbody>
+</table>
+
 <a name="Aperture.forLabel"></a>
 
 ## Aperture.forLabel(label) ⇒ [<code>Aperture</code>](#Aperture) \| <code>null</code>
@@ -668,7 +796,13 @@ An internal class that will be added to Exceptions as "EDS_ERROR" property.
 
 **Example**  
 
-```typescripttry {} catch (e) {  if ("EDS_ERROR" in e && e.EDS_ERROR.equalTo(ApiError.Code.DEVICE_BUSY)) {  }}```
+```typescript
+try {
+} catch (e) {
+  if ("EDS_ERROR" in e && e.EDS_ERROR.equalTo(ApiError.Code.DEVICE_BUSY)) {
+  }
+}
+```
 
 <a name="ApiIdentifier+label"></a>
 
@@ -701,7 +835,8 @@ An internal class that will be added to Exceptions as "EDS_ERROR" property.
 <a name="ApiIdentifier+Symbol_toPrimitive"></a>
 
 ## apiError.Symbol\_toPrimitive(hint) ⇒ <code>string</code> \| <code>number</code> \| <code>null</code>
-Allows type cast to number and string.The string will be a hexadecimal code representation of the number
+Allows type cast to number and string.
+The string will be a hexadecimal code representation of the number
 
 **Kind**: instance method of [<code>ApiError</code>](#ApiError)  
 <table>
@@ -749,8 +884,6 @@ Allows type cast to number and string.The string will be a hexadecimal code rep
     </tr><tr>
     <td>COMM_USB_BUS_ERR</td><td><code>number</code></td><td><code>196</code></td>
     </tr><tr>
-    <td>DEVICEPROP_NOT_SUPPORTED</td><td><code>number</code></td><td><code>8202</code></td>
-    </tr><tr>
     <td>DEVICE_BUSY</td><td><code>number</code></td><td><code>129</code></td>
     </tr><tr>
     <td>DEVICE_CF_GATE_CHANGED</td><td><code>number</code></td><td><code>137</code></td>
@@ -769,6 +902,8 @@ Allows type cast to number and string.The string will be a hexadecimal code rep
     </tr><tr>
     <td>DEVICE_MEMORY_FULL</td><td><code>number</code></td><td><code>132</code></td>
     </tr><tr>
+    <td>DEVICE_NO_DISK</td><td><code>number</code></td><td><code>135</code></td>
+    </tr><tr>
     <td>DEVICE_NOT_FOUND</td><td><code>number</code></td><td><code>128</code></td>
     </tr><tr>
     <td>DEVICE_NOT_INSTALLED</td><td><code>number</code></td><td><code>139</code></td>
@@ -777,9 +912,9 @@ Allows type cast to number and string.The string will be a hexadecimal code rep
     </tr><tr>
     <td>DEVICE_NOT_RELEASED</td><td><code>number</code></td><td><code>141</code></td>
     </tr><tr>
-    <td>DEVICE_NO_DISK</td><td><code>number</code></td><td><code>135</code></td>
-    </tr><tr>
     <td>DEVICE_STAY_AWAKE</td><td><code>number</code></td><td><code>140</code></td>
+    </tr><tr>
+    <td>DEVICEPROP_NOT_SUPPORTED</td><td><code>number</code></td><td><code>8202</code></td>
     </tr><tr>
     <td>DIR_ENTRY_EXISTS</td><td><code>number</code></td><td><code>67</code></td>
     </tr><tr>
@@ -867,19 +1002,19 @@ Allows type cast to number and string.The string will be a hexadecimal code rep
     </tr><tr>
     <td>LOW_BATTERY</td><td><code>number</code></td><td><code>41217</code></td>
     </tr><tr>
-    <td>MEMORYSTATUS_NOTREADY</td><td><code>number</code></td><td><code>41222</code></td>
-    </tr><tr>
     <td>MEM_ALLOC_FAILED</td><td><code>number</code></td><td><code>3</code></td>
     </tr><tr>
     <td>MEM_FREE_FAILED</td><td><code>number</code></td><td><code>4</code></td>
     </tr><tr>
+    <td>MEMORYSTATUS_NOTREADY</td><td><code>number</code></td><td><code>41222</code></td>
+    </tr><tr>
     <td>MISSING_SUBCOMPONENT</td><td><code>number</code></td><td><code>10</code></td>
+    </tr><tr>
+    <td>NO_VALID_OBJECTINFO</td><td><code>number</code></td><td><code>8213</code></td>
     </tr><tr>
     <td>NOT_CAMERA_SUPPORT_SDK_VERSION</td><td><code>number</code></td><td><code>8225</code></td>
     </tr><tr>
     <td>NOT_SUPPORTED</td><td><code>number</code></td><td><code>7</code></td>
-    </tr><tr>
-    <td>NO_VALID_OBJECTINFO</td><td><code>number</code></td><td><code>8213</code></td>
     </tr><tr>
     <td>OBJECT_NOTREADY</td><td><code>number</code></td><td><code>41218</code></td>
     </tr><tr>
@@ -1035,7 +1170,8 @@ Superclass for identifier wrappers. Provides the identifiers as class constants 
 <a name="ApiIdentifier+Symbol_toPrimitive"></a>
 
 ## apiIdentifier.Symbol\_toPrimitive(hint) ⇒ <code>string</code> \| <code>number</code> \| <code>null</code>
-Allows type cast to number and string.The string will be a hexadecimal code representation of the number
+Allows type cast to number and string.
+The string will be a hexadecimal code representation of the number
 
 **Kind**: instance method of [<code>ApiIdentifier</code>](#ApiIdentifier)  
 <table>
@@ -1071,6 +1207,89 @@ Allows type cast to number and string.The string will be a hexadecimal code rep
 
 ## apiIdentifier.toJSON() ⇒ <code>Object</code>
 **Kind**: instance method of [<code>ApiIdentifier</code>](#ApiIdentifier)  
+<a name="FileFormat"></a>
+
+# FileFormat
+**Kind**: global class  
+
+* [FileFormat](#FileFormat)
+    * [new FileFormat(value_)](#new_FileFormat_new)
+    * [new FileFormat(value_)](#new_FileFormat_new)
+    * _instance_
+        * [.label](#FileFormat+label) : <code>string</code>
+        * [.value](#FileFormat+value) : <code>number</code>
+    * _static_
+        * [.ID](#FileFormat.ID) : <code>enum</code>
+
+<a name="new_FileFormat_new"></a>
+
+## new FileFormat(value_)
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>value_</td><td><code>number</code></td>
+    </tr>  </tbody>
+</table>
+
+<a name="new_FileFormat_new"></a>
+
+## new FileFormat(value_)
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>value_</td><td><code>number</code></td>
+    </tr>  </tbody>
+</table>
+
+<a name="FileFormat+label"></a>
+
+## fileFormat.label : <code>string</code>
+**Kind**: instance property of [<code>FileFormat</code>](#FileFormat)  
+**Read only**: true  
+<a name="FileFormat+value"></a>
+
+## fileFormat.value : <code>number</code>
+**Kind**: instance property of [<code>FileFormat</code>](#FileFormat)  
+**Read only**: true  
+<a name="FileFormat.ID"></a>
+
+## FileFormat.ID : <code>enum</code>
+**Kind**: static enum of [<code>FileFormat</code>](#FileFormat)  
+**Read only**: true  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>CR2</td><td><code>number</code></td><td><code>45315</code></td>
+    </tr><tr>
+    <td>CR3</td><td><code>number</code></td><td><code>45320</code></td>
+    </tr><tr>
+    <td>HEIF_CODE</td><td><code>number</code></td><td><code>45323</code></td>
+    </tr><tr>
+    <td>JPEG</td><td><code>number</code></td><td><code>14337</code></td>
+    </tr><tr>
+    <td>MP4</td><td><code>number</code></td><td><code>47490</code></td>
+    </tr><tr>
+    <td>Unknown</td><td><code>number</code></td><td><code>0</code></td>
+    </tr>  </tbody>
+</table>
+
 <a name="Camera"></a>
 
 # Camera
@@ -1420,7 +1639,18 @@ Access to Canon Cameras
 
 **Example**  
 
-```typescriptconst {cameraBrowser, watchCameras} = require('@dimensional/napi-canon-cameras');cameraBrowser.setEventHandler(  (eventName, event) => { console.log(eventName, event); });process.on('SIGINT', () => process.exit());console.log(cameraBrowser.getCameras());watchCameras();```
+```typescript
+const {cameraBrowser, watchCameras} = require('@dimensional/napi-canon-cameras');
+cameraBrowser.setEventHandler(
+  (eventName, event) => { console.log(eventName, event); }
+);
+
+process.on('SIGINT', () => process.exit());
+
+console.log(cameraBrowser.getCameras());
+
+watchCameras();
+```
 
 <a name="CameraBrowser+setEventHandler"></a>
 
@@ -1461,7 +1691,8 @@ Trigger SDK events
 <a name="CameraBrowser+getCamera"></a>
 
 ## cameraBrowser.getCamera([at], [exactOnly])
-Get camera at port or index. Returns the first camera in the internal list ifport or position is invalid. USe the exactOnly argument to disable the fallback.
+Get camera at port or index. Returns the first camera in the internal list if
+port or position is invalid. USe the exactOnly argument to disable the fallback.
 
 **Kind**: instance method of [<code>CameraBrowser</code>](#CameraBrowser)  
 <table>
@@ -1887,7 +2118,10 @@ Camera property/setting.
 
 **Example**  
 
-```typescriptconst property = camera.getProperty(Property.ID.Av);console.log(property.value, property.allowedValues);```
+```typescript
+const property = camera.getProperty(Property.ID.Av);
+console.log(property.value, property.allowedValues);
+```
 
 <a name="CameraProperty+label"></a>
 
@@ -1946,6 +2180,8 @@ Camera property/setting.
     </tr><tr>
     <td>Artist</td><td><code>number</code></td><td><code>1048</code></td>
     </tr><tr>
+    <td>Aspect</td><td><code>number</code></td><td><code>16778289</code></td>
+    </tr><tr>
     <td>AutoPowerOffSetting</td><td><code>number</code></td><td><code>16778334</code></td>
     </tr><tr>
     <td>Av</td><td><code>number</code></td><td><code>1029</code></td>
@@ -1972,19 +2208,17 @@ Camera property/setting.
     </tr><tr>
     <td>CurrentStorage</td><td><code>number</code></td><td><code>12</code></td>
     </tr><tr>
+    <td>DateTime</td><td><code>number</code></td><td><code>6</code></td>
+    </tr><tr>
     <td>DC_Strobe</td><td><code>number</code></td><td><code>1537</code></td>
     </tr><tr>
     <td>DC_Zoom</td><td><code>number</code></td><td><code>1536</code></td>
-    </tr><tr>
-    <td>DateTime</td><td><code>number</code></td><td><code>6</code></td>
     </tr><tr>
     <td>DepthOfField</td><td><code>number</code></td><td><code>1051</code></td>
     </tr><tr>
     <td>DriveMode</td><td><code>number</code></td><td><code>1025</code></td>
     </tr><tr>
     <td>EFCompensation</td><td><code>number</code></td><td><code>1054</code></td>
-    </tr><tr>
-    <td>EVF_RollingPitching</td><td><code>number</code></td><td><code>16778564</code></td>
     </tr><tr>
     <td>Evf_AFMode</td><td><code>number</code></td><td><code>1294</code></td>
     </tr><tr>
@@ -2023,6 +2257,8 @@ Camera property/setting.
     <td>Evf_PowerZoom_MaxPosition</td><td><code>number</code></td><td><code>1361</code></td>
     </tr><tr>
     <td>Evf_PowerZoom_MinPosition</td><td><code>number</code></td><td><code>1362</code></td>
+    </tr><tr>
+    <td>EVF_RollingPitching</td><td><code>number</code></td><td><code>16778564</code></td>
     </tr><tr>
     <td>Evf_WhiteBalance</td><td><code>number</code></td><td><code>1282</code></td>
     </tr><tr>
@@ -2078,11 +2314,11 @@ Camera property/setting.
     </tr><tr>
     <td>ICCProfile</td><td><code>number</code></td><td><code>259</code></td>
     </tr><tr>
+    <td>ImageQuality</td><td><code>number</code></td><td><code>256</code></td>
+    </tr><tr>
     <td>ISOBracket</td><td><code>number</code></td><td><code>1040</code></td>
     </tr><tr>
     <td>ISOSpeed</td><td><code>number</code></td><td><code>1026</code></td>
-    </tr><tr>
-    <td>ImageQuality</td><td><code>number</code></td><td><code>256</code></td>
     </tr><tr>
     <td>JpegQuality</td><td><code>number</code></td><td><code>257</code></td>
     </tr><tr>
@@ -2343,11 +2579,27 @@ Create instance for label.
 
 * [FileFormat](#FileFormat)
     * [new FileFormat(value_)](#new_FileFormat_new)
+    * [new FileFormat(value_)](#new_FileFormat_new)
     * _instance_
         * [.label](#FileFormat+label) : <code>string</code>
         * [.value](#FileFormat+value) : <code>number</code>
     * _static_
         * [.ID](#FileFormat.ID) : <code>enum</code>
+
+<a name="new_FileFormat_new"></a>
+
+## new FileFormat(value_)
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>value_</td><td><code>number</code></td>
+    </tr>  </tbody>
+</table>
 
 <a name="new_FileFormat_new"></a>
 
@@ -2499,391 +2751,6 @@ Create instance for label.
   <tbody>
 <tr>
     <td>label</td><td><code>string</code></td>
-    </tr>  </tbody>
-</table>
-
-<a name="ImageQuality"></a>
-
-# ImageQuality
-**Kind**: global class  
-
-* [ImageQuality](#ImageQuality)
-    * [new ImageQuality(value_)](#new_ImageQuality_new)
-    * _instance_
-        * [.label](#ImageQuality+label) : <code>string</code>
-        * [.value](#ImageQuality+value) : <code>number</code>
-        * [.main](#ImageQuality+main) : [<code>ImageQualityProperties</code>](#ImageQualityProperties)
-        * [.secondary](#ImageQuality+secondary) : [<code>ImageQualityProperties</code>](#ImageQualityProperties)
-    * _static_
-        * [.ID](#ImageQuality.ID) : <code>enum</code>
-        * [.Format](#ImageQuality.Format) : <code>enum</code>
-        * [.Size](#ImageQuality.Size) : <code>enum</code>
-        * [.CompressionQuality](#ImageQuality.CompressionQuality) : <code>enum</code>
-
-<a name="new_ImageQuality_new"></a>
-
-## new ImageQuality(value_)
-<table>
-  <thead>
-    <tr>
-      <th>Param</th><th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>value_</td><td><code>number</code></td>
-    </tr>  </tbody>
-</table>
-
-<a name="ImageQuality+label"></a>
-
-## imageQuality.label : <code>string</code>
-**Kind**: instance property of [<code>ImageQuality</code>](#ImageQuality)  
-**Read only**: true  
-<a name="ImageQuality+value"></a>
-
-## imageQuality.value : <code>number</code>
-**Kind**: instance property of [<code>ImageQuality</code>](#ImageQuality)  
-**Read only**: true  
-<a name="ImageQuality+main"></a>
-
-## imageQuality.main : [<code>ImageQualityProperties</code>](#ImageQualityProperties)
-**Kind**: instance property of [<code>ImageQuality</code>](#ImageQuality)  
-**Read only**: true  
-<a name="ImageQuality+secondary"></a>
-
-## imageQuality.secondary : [<code>ImageQualityProperties</code>](#ImageQualityProperties)
-**Kind**: instance property of [<code>ImageQuality</code>](#ImageQuality)  
-**Read only**: true  
-<a name="ImageQuality.ID"></a>
-
-## ImageQuality.ID : <code>enum</code>
-**Kind**: static enum of [<code>ImageQuality</code>](#ImageQuality)  
-**Read only**: true  
-**Properties**
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th><th>Type</th><th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>CR</td><td><code>number</code></td><td><code>6553359</code></td>
-    </tr><tr>
-    <td>CRHEIFL</td><td><code>number</code></td><td><code>6488192</code></td>
-    </tr><tr>
-    <td>CRHEIFLF</td><td><code>number</code></td><td><code>6488195</code></td>
-    </tr><tr>
-    <td>CRHEIFLN</td><td><code>number</code></td><td><code>6488194</code></td>
-    </tr><tr>
-    <td>CRHEIFMF</td><td><code>number</code></td><td><code>6488451</code></td>
-    </tr><tr>
-    <td>CRHEIFMN</td><td><code>number</code></td><td><code>6488450</code></td>
-    </tr><tr>
-    <td>CRHEIFS1F</td><td><code>number</code></td><td><code>6491779</code></td>
-    </tr><tr>
-    <td>CRHEIFS1N</td><td><code>number</code></td><td><code>6491778</code></td>
-    </tr><tr>
-    <td>CRHEIFS2F</td><td><code>number</code></td><td><code>6492035</code></td>
-    </tr><tr>
-    <td>CRLJ</td><td><code>number</code></td><td><code>6488080</code></td>
-    </tr><tr>
-    <td>CRLJF</td><td><code>number</code></td><td><code>6488083</code></td>
-    </tr><tr>
-    <td>CRLJN</td><td><code>number</code></td><td><code>6488082</code></td>
-    </tr><tr>
-    <td>CRM1J</td><td><code>number</code></td><td><code>6489360</code></td>
-    </tr><tr>
-    <td>CRM1JF</td><td><code>number</code></td><td><code>6489363</code></td>
-    </tr><tr>
-    <td>CRM1JN</td><td><code>number</code></td><td><code>6489362</code></td>
-    </tr><tr>
-    <td>CRM2J</td><td><code>number</code></td><td><code>6489616</code></td>
-    </tr><tr>
-    <td>CRM2JF</td><td><code>number</code></td><td><code>6489619</code></td>
-    </tr><tr>
-    <td>CRM2JN</td><td><code>number</code></td><td><code>6489618</code></td>
-    </tr><tr>
-    <td>CRMJ</td><td><code>number</code></td><td><code>6488336</code></td>
-    </tr><tr>
-    <td>CRMJF</td><td><code>number</code></td><td><code>6488339</code></td>
-    </tr><tr>
-    <td>CRMJN</td><td><code>number</code></td><td><code>6488338</code></td>
-    </tr><tr>
-    <td>CRS1J</td><td><code>number</code></td><td><code>6491664</code></td>
-    </tr><tr>
-    <td>CRS1JF</td><td><code>number</code></td><td><code>6491667</code></td>
-    </tr><tr>
-    <td>CRS1JN</td><td><code>number</code></td><td><code>6491666</code></td>
-    </tr><tr>
-    <td>CRS2J</td><td><code>number</code></td><td><code>6491920</code></td>
-    </tr><tr>
-    <td>CRS2JF</td><td><code>number</code></td><td><code>6491923</code></td>
-    </tr><tr>
-    <td>CRS3JF</td><td><code>number</code></td><td><code>6492179</code></td>
-    </tr><tr>
-    <td>CRSJ</td><td><code>number</code></td><td><code>6488592</code></td>
-    </tr><tr>
-    <td>CRSJF</td><td><code>number</code></td><td><code>6488595</code></td>
-    </tr><tr>
-    <td>CRSJN</td><td><code>number</code></td><td><code>6488594</code></td>
-    </tr><tr>
-    <td>HEIFL</td><td><code>number</code></td><td><code>8453903</code></td>
-    </tr><tr>
-    <td>HEIFLF</td><td><code>number</code></td><td><code>8650511</code></td>
-    </tr><tr>
-    <td>HEIFLN</td><td><code>number</code></td><td><code>8584975</code></td>
-    </tr><tr>
-    <td>HEIFMF</td><td><code>number</code></td><td><code>25427727</code></td>
-    </tr><tr>
-    <td>HEIFMN</td><td><code>number</code></td><td><code>25362191</code></td>
-    </tr><tr>
-    <td>HEIFS1F</td><td><code>number</code></td><td><code>243531535</code></td>
-    </tr><tr>
-    <td>HEIFS1N</td><td><code>number</code></td><td><code>243465999</code></td>
-    </tr><tr>
-    <td>HEIFS2F</td><td><code>number</code></td><td><code>260308751</code></td>
-    </tr><tr>
-    <td>LargeJPEG</td><td><code>number</code></td><td><code>1113871</code></td>
-    </tr><tr>
-    <td>LargeJPEGFine</td><td><code>number</code></td><td><code>1310479</code></td>
-    </tr><tr>
-    <td>LargeJPEGNormal</td><td><code>number</code></td><td><code>1244943</code></td>
-    </tr><tr>
-    <td>MR</td><td><code>number</code></td><td><code>23396111</code></td>
-    </tr><tr>
-    <td>MRLJ</td><td><code>number</code></td><td><code>23330832</code></td>
-    </tr><tr>
-    <td>MRLJF</td><td><code>number</code></td><td><code>23330835</code></td>
-    </tr><tr>
-    <td>MRLJN</td><td><code>number</code></td><td><code>23330834</code></td>
-    </tr><tr>
-    <td>MRM1J</td><td><code>number</code></td><td><code>23332112</code></td>
-    </tr><tr>
-    <td>MRM2J</td><td><code>number</code></td><td><code>23332368</code></td>
-    </tr><tr>
-    <td>MRMJF</td><td><code>number</code></td><td><code>23331091</code></td>
-    </tr><tr>
-    <td>MRMJN</td><td><code>number</code></td><td><code>23331090</code></td>
-    </tr><tr>
-    <td>MRS1JF</td><td><code>number</code></td><td><code>23334419</code></td>
-    </tr><tr>
-    <td>MRS1JN</td><td><code>number</code></td><td><code>23334418</code></td>
-    </tr><tr>
-    <td>MRS2JF</td><td><code>number</code></td><td><code>23334675</code></td>
-    </tr><tr>
-    <td>MRS3JF</td><td><code>number</code></td><td><code>23334931</code></td>
-    </tr><tr>
-    <td>MRSJ</td><td><code>number</code></td><td><code>23331344</code></td>
-    </tr><tr>
-    <td>MRSJF</td><td><code>number</code></td><td><code>23331347</code></td>
-    </tr><tr>
-    <td>MRSJN</td><td><code>number</code></td><td><code>23331346</code></td>
-    </tr><tr>
-    <td>Middle1JPEG</td><td><code>number</code></td><td><code>84999951</code></td>
-    </tr><tr>
-    <td>Middle2JPEG</td><td><code>number</code></td><td><code>101777167</code></td>
-    </tr><tr>
-    <td>MiddleJPEG</td><td><code>number</code></td><td><code>17891087</code></td>
-    </tr><tr>
-    <td>MiddleJPEGFine</td><td><code>number</code></td><td><code>18087695</code></td>
-    </tr><tr>
-    <td>MiddleJPEGNormal</td><td><code>number</code></td><td><code>18022159</code></td>
-    </tr><tr>
-    <td>RAW</td><td><code>number</code></td><td><code>6618895</code></td>
-    </tr><tr>
-    <td>RAWAndLargeJPEG</td><td><code>number</code></td><td><code>6553616</code></td>
-    </tr><tr>
-    <td>RAWAndLargeJPEGFine</td><td><code>number</code></td><td><code>6553619</code></td>
-    </tr><tr>
-    <td>RAWAndLargeJPEGNormal</td><td><code>number</code></td><td><code>6553618</code></td>
-    </tr><tr>
-    <td>RAWAndMiddle1JPEG</td><td><code>number</code></td><td><code>6554896</code></td>
-    </tr><tr>
-    <td>RAWAndMiddle2JPEG</td><td><code>number</code></td><td><code>6555152</code></td>
-    </tr><tr>
-    <td>RAWAndMiddleJPEG</td><td><code>number</code></td><td><code>6553872</code></td>
-    </tr><tr>
-    <td>RAWAndMiddleJPEGFine</td><td><code>number</code></td><td><code>6553875</code></td>
-    </tr><tr>
-    <td>RAWAndMiddleJPEGNormal</td><td><code>number</code></td><td><code>6553874</code></td>
-    </tr><tr>
-    <td>RAWAndSmall1JPEG</td><td><code>number</code></td><td><code>6557200</code></td>
-    </tr><tr>
-    <td>RAWAndSmall1JPEGFine</td><td><code>number</code></td><td><code>6557203</code></td>
-    </tr><tr>
-    <td>RAWAndSmall1JPEGNormal</td><td><code>number</code></td><td><code>6557202</code></td>
-    </tr><tr>
-    <td>RAWAndSmall2JPEG</td><td><code>number</code></td><td><code>6557456</code></td>
-    </tr><tr>
-    <td>RAWAndSmall2JPEGFine</td><td><code>number</code></td><td><code>6557459</code></td>
-    </tr><tr>
-    <td>RAWAndSmall3JPEGFine</td><td><code>number</code></td><td><code>6557715</code></td>
-    </tr><tr>
-    <td>RAWAndSmallJPEG</td><td><code>number</code></td><td><code>6554128</code></td>
-    </tr><tr>
-    <td>RAWAndSmallJPEGFine</td><td><code>number</code></td><td><code>6554131</code></td>
-    </tr><tr>
-    <td>RAWAndSmallJPEGNormal</td><td><code>number</code></td><td><code>6554130</code></td>
-    </tr><tr>
-    <td>RHEIFL</td><td><code>number</code></td><td><code>6553728</code></td>
-    </tr><tr>
-    <td>RHEIFLF</td><td><code>number</code></td><td><code>6553731</code></td>
-    </tr><tr>
-    <td>RHEIFLN</td><td><code>number</code></td><td><code>6553730</code></td>
-    </tr><tr>
-    <td>RHEIFMF</td><td><code>number</code></td><td><code>6553987</code></td>
-    </tr><tr>
-    <td>RHEIFMN</td><td><code>number</code></td><td><code>6553986</code></td>
-    </tr><tr>
-    <td>RHEIFS1F</td><td><code>number</code></td><td><code>6557315</code></td>
-    </tr><tr>
-    <td>RHEIFS1N</td><td><code>number</code></td><td><code>6557314</code></td>
-    </tr><tr>
-    <td>RHEIFS2F</td><td><code>number</code></td><td><code>6557571</code></td>
-    </tr><tr>
-    <td>SR</td><td><code>number</code></td><td><code>40173327</code></td>
-    </tr><tr>
-    <td>SRLJ</td><td><code>number</code></td><td><code>40108048</code></td>
-    </tr><tr>
-    <td>SRLJF</td><td><code>number</code></td><td><code>40108051</code></td>
-    </tr><tr>
-    <td>SRLJN</td><td><code>number</code></td><td><code>40108050</code></td>
-    </tr><tr>
-    <td>SRM1J</td><td><code>number</code></td><td><code>40109328</code></td>
-    </tr><tr>
-    <td>SRM2J</td><td><code>number</code></td><td><code>40109584</code></td>
-    </tr><tr>
-    <td>SRMJF</td><td><code>number</code></td><td><code>40108307</code></td>
-    </tr><tr>
-    <td>SRMJN</td><td><code>number</code></td><td><code>40108306</code></td>
-    </tr><tr>
-    <td>SRS1JF</td><td><code>number</code></td><td><code>40111635</code></td>
-    </tr><tr>
-    <td>SRS1JN</td><td><code>number</code></td><td><code>40111634</code></td>
-    </tr><tr>
-    <td>SRS2JF</td><td><code>number</code></td><td><code>40111891</code></td>
-    </tr><tr>
-    <td>SRS3JF</td><td><code>number</code></td><td><code>40112147</code></td>
-    </tr><tr>
-    <td>SRSJ</td><td><code>number</code></td><td><code>40108560</code></td>
-    </tr><tr>
-    <td>SRSJF</td><td><code>number</code></td><td><code>40108563</code></td>
-    </tr><tr>
-    <td>SRSJN</td><td><code>number</code></td><td><code>40108562</code></td>
-    </tr><tr>
-    <td>Small1JPEGFine</td><td><code>number</code></td><td><code>236191503</code></td>
-    </tr><tr>
-    <td>Small1JPEGNormal</td><td><code>number</code></td><td><code>236125967</code></td>
-    </tr><tr>
-    <td>Small2JPEGFine</td><td><code>number</code></td><td><code>252968719</code></td>
-    </tr><tr>
-    <td>Small3JPEGFine</td><td><code>number</code></td><td><code>269745935</code></td>
-    </tr><tr>
-    <td>SmallJPEG</td><td><code>number</code></td><td><code>34668303</code></td>
-    </tr><tr>
-    <td>SmallJPEG1</td><td><code>number</code></td><td><code>235994895</code></td>
-    </tr><tr>
-    <td>SmallJPEG2</td><td><code>number</code></td><td><code>252772111</code></td>
-    </tr><tr>
-    <td>SmallJPEGFine</td><td><code>number</code></td><td><code>34864911</code></td>
-    </tr><tr>
-    <td>SmallJPEGNormal</td><td><code>number</code></td><td><code>34799375</code></td>
-    </tr><tr>
-    <td>Unknown</td><td><code>number</code></td><td><code>4294967295</code></td>
-    </tr>  </tbody>
-</table>
-
-<a name="ImageQuality.Format"></a>
-
-## ImageQuality.Format : <code>enum</code>
-**Kind**: static enum of [<code>ImageQuality</code>](#ImageQuality)  
-**Read only**: true  
-**Properties**
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th><th>Type</th><th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>CR2</td><td><code>number</code></td><td><code>6</code></td>
-    </tr><tr>
-    <td>CRW</td><td><code>number</code></td><td><code>2</code></td>
-    </tr><tr>
-    <td>HEIF</td><td><code>number</code></td><td><code>8</code></td>
-    </tr><tr>
-    <td>JPEG</td><td><code>number</code></td><td><code>1</code></td>
-    </tr><tr>
-    <td>RAW</td><td><code>number</code></td><td><code>4</code></td>
-    </tr><tr>
-    <td>Unknown</td><td><code>number</code></td><td><code>0</code></td>
-    </tr>  </tbody>
-</table>
-
-<a name="ImageQuality.Size"></a>
-
-## ImageQuality.Size : <code>enum</code>
-**Kind**: static enum of [<code>ImageQuality</code>](#ImageQuality)  
-**Read only**: true  
-**Properties**
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th><th>Type</th><th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>Large</td><td><code>number</code></td><td><code>0</code></td>
-    </tr><tr>
-    <td>Middle</td><td><code>number</code></td><td><code>1</code></td>
-    </tr><tr>
-    <td>Middle1</td><td><code>number</code></td><td><code>5</code></td>
-    </tr><tr>
-    <td>Middle2</td><td><code>number</code></td><td><code>6</code></td>
-    </tr><tr>
-    <td>Small</td><td><code>number</code></td><td><code>2</code></td>
-    </tr><tr>
-    <td>Small1</td><td><code>number</code></td><td><code>14</code></td>
-    </tr><tr>
-    <td>Small2</td><td><code>number</code></td><td><code>15</code></td>
-    </tr><tr>
-    <td>Small3</td><td><code>number</code></td><td><code>16</code></td>
-    </tr><tr>
-    <td>Unknown</td><td><code>number</code></td><td><code>4294967295</code></td>
-    </tr>  </tbody>
-</table>
-
-<a name="ImageQuality.CompressionQuality"></a>
-
-## ImageQuality.CompressionQuality : <code>enum</code>
-**Kind**: static enum of [<code>ImageQuality</code>](#ImageQuality)  
-**Read only**: true  
-**Properties**
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th><th>Type</th><th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>Fine</td><td><code>number</code></td><td><code>3</code></td>
-    </tr><tr>
-    <td>Lossless</td><td><code>number</code></td><td><code>4</code></td>
-    </tr><tr>
-    <td>Normal</td><td><code>number</code></td><td><code>2</code></td>
-    </tr><tr>
-    <td>SuperFine</td><td><code>number</code></td><td><code>5</code></td>
-    </tr><tr>
-    <td>Unknown</td><td><code>number</code></td><td><code>4294967295</code></td>
     </tr>  </tbody>
 </table>
 
@@ -3071,6 +2938,391 @@ Create instance for label.
     </tr>  </tbody>
 </table>
 
+<a name="ImageQuality"></a>
+
+# ImageQuality
+**Kind**: global class  
+
+* [ImageQuality](#ImageQuality)
+    * [new ImageQuality(value_)](#new_ImageQuality_new)
+    * _instance_
+        * [.label](#ImageQuality+label) : <code>string</code>
+        * [.value](#ImageQuality+value) : <code>number</code>
+        * [.main](#ImageQuality+main) : [<code>ImageQualityProperties</code>](#ImageQualityProperties)
+        * [.secondary](#ImageQuality+secondary) : [<code>ImageQualityProperties</code>](#ImageQualityProperties)
+    * _static_
+        * [.ID](#ImageQuality.ID) : <code>enum</code>
+        * [.Format](#ImageQuality.Format) : <code>enum</code>
+        * [.Size](#ImageQuality.Size) : <code>enum</code>
+        * [.CompressionQuality](#ImageQuality.CompressionQuality) : <code>enum</code>
+
+<a name="new_ImageQuality_new"></a>
+
+## new ImageQuality(value_)
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>value_</td><td><code>number</code></td>
+    </tr>  </tbody>
+</table>
+
+<a name="ImageQuality+label"></a>
+
+## imageQuality.label : <code>string</code>
+**Kind**: instance property of [<code>ImageQuality</code>](#ImageQuality)  
+**Read only**: true  
+<a name="ImageQuality+value"></a>
+
+## imageQuality.value : <code>number</code>
+**Kind**: instance property of [<code>ImageQuality</code>](#ImageQuality)  
+**Read only**: true  
+<a name="ImageQuality+main"></a>
+
+## imageQuality.main : [<code>ImageQualityProperties</code>](#ImageQualityProperties)
+**Kind**: instance property of [<code>ImageQuality</code>](#ImageQuality)  
+**Read only**: true  
+<a name="ImageQuality+secondary"></a>
+
+## imageQuality.secondary : [<code>ImageQualityProperties</code>](#ImageQualityProperties)
+**Kind**: instance property of [<code>ImageQuality</code>](#ImageQuality)  
+**Read only**: true  
+<a name="ImageQuality.ID"></a>
+
+## ImageQuality.ID : <code>enum</code>
+**Kind**: static enum of [<code>ImageQuality</code>](#ImageQuality)  
+**Read only**: true  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>CR</td><td><code>number</code></td><td><code>6553359</code></td>
+    </tr><tr>
+    <td>CRHEIFL</td><td><code>number</code></td><td><code>6488192</code></td>
+    </tr><tr>
+    <td>CRHEIFLF</td><td><code>number</code></td><td><code>6488195</code></td>
+    </tr><tr>
+    <td>CRHEIFLN</td><td><code>number</code></td><td><code>6488194</code></td>
+    </tr><tr>
+    <td>CRHEIFMF</td><td><code>number</code></td><td><code>6488451</code></td>
+    </tr><tr>
+    <td>CRHEIFMN</td><td><code>number</code></td><td><code>6488450</code></td>
+    </tr><tr>
+    <td>CRHEIFS1F</td><td><code>number</code></td><td><code>6491779</code></td>
+    </tr><tr>
+    <td>CRHEIFS1N</td><td><code>number</code></td><td><code>6491778</code></td>
+    </tr><tr>
+    <td>CRHEIFS2F</td><td><code>number</code></td><td><code>6492035</code></td>
+    </tr><tr>
+    <td>CRLJ</td><td><code>number</code></td><td><code>6488080</code></td>
+    </tr><tr>
+    <td>CRLJF</td><td><code>number</code></td><td><code>6488083</code></td>
+    </tr><tr>
+    <td>CRLJN</td><td><code>number</code></td><td><code>6488082</code></td>
+    </tr><tr>
+    <td>CRM1J</td><td><code>number</code></td><td><code>6489360</code></td>
+    </tr><tr>
+    <td>CRM1JF</td><td><code>number</code></td><td><code>6489363</code></td>
+    </tr><tr>
+    <td>CRM1JN</td><td><code>number</code></td><td><code>6489362</code></td>
+    </tr><tr>
+    <td>CRM2J</td><td><code>number</code></td><td><code>6489616</code></td>
+    </tr><tr>
+    <td>CRM2JF</td><td><code>number</code></td><td><code>6489619</code></td>
+    </tr><tr>
+    <td>CRM2JN</td><td><code>number</code></td><td><code>6489618</code></td>
+    </tr><tr>
+    <td>CRMJ</td><td><code>number</code></td><td><code>6488336</code></td>
+    </tr><tr>
+    <td>CRMJF</td><td><code>number</code></td><td><code>6488339</code></td>
+    </tr><tr>
+    <td>CRMJN</td><td><code>number</code></td><td><code>6488338</code></td>
+    </tr><tr>
+    <td>CRS1J</td><td><code>number</code></td><td><code>6491664</code></td>
+    </tr><tr>
+    <td>CRS1JF</td><td><code>number</code></td><td><code>6491667</code></td>
+    </tr><tr>
+    <td>CRS1JN</td><td><code>number</code></td><td><code>6491666</code></td>
+    </tr><tr>
+    <td>CRS2J</td><td><code>number</code></td><td><code>6491920</code></td>
+    </tr><tr>
+    <td>CRS2JF</td><td><code>number</code></td><td><code>6491923</code></td>
+    </tr><tr>
+    <td>CRS3JF</td><td><code>number</code></td><td><code>6492179</code></td>
+    </tr><tr>
+    <td>CRSJ</td><td><code>number</code></td><td><code>6488592</code></td>
+    </tr><tr>
+    <td>CRSJF</td><td><code>number</code></td><td><code>6488595</code></td>
+    </tr><tr>
+    <td>CRSJN</td><td><code>number</code></td><td><code>6488594</code></td>
+    </tr><tr>
+    <td>HEIFL</td><td><code>number</code></td><td><code>8453903</code></td>
+    </tr><tr>
+    <td>HEIFLF</td><td><code>number</code></td><td><code>8650511</code></td>
+    </tr><tr>
+    <td>HEIFLN</td><td><code>number</code></td><td><code>8584975</code></td>
+    </tr><tr>
+    <td>HEIFMF</td><td><code>number</code></td><td><code>25427727</code></td>
+    </tr><tr>
+    <td>HEIFMN</td><td><code>number</code></td><td><code>25362191</code></td>
+    </tr><tr>
+    <td>HEIFS1F</td><td><code>number</code></td><td><code>243531535</code></td>
+    </tr><tr>
+    <td>HEIFS1N</td><td><code>number</code></td><td><code>243465999</code></td>
+    </tr><tr>
+    <td>HEIFS2F</td><td><code>number</code></td><td><code>260308751</code></td>
+    </tr><tr>
+    <td>LargeJPEG</td><td><code>number</code></td><td><code>1113871</code></td>
+    </tr><tr>
+    <td>LargeJPEGFine</td><td><code>number</code></td><td><code>1310479</code></td>
+    </tr><tr>
+    <td>LargeJPEGNormal</td><td><code>number</code></td><td><code>1244943</code></td>
+    </tr><tr>
+    <td>Middle1JPEG</td><td><code>number</code></td><td><code>84999951</code></td>
+    </tr><tr>
+    <td>Middle2JPEG</td><td><code>number</code></td><td><code>101777167</code></td>
+    </tr><tr>
+    <td>MiddleJPEG</td><td><code>number</code></td><td><code>17891087</code></td>
+    </tr><tr>
+    <td>MiddleJPEGFine</td><td><code>number</code></td><td><code>18087695</code></td>
+    </tr><tr>
+    <td>MiddleJPEGNormal</td><td><code>number</code></td><td><code>18022159</code></td>
+    </tr><tr>
+    <td>MR</td><td><code>number</code></td><td><code>23396111</code></td>
+    </tr><tr>
+    <td>MRLJ</td><td><code>number</code></td><td><code>23330832</code></td>
+    </tr><tr>
+    <td>MRLJF</td><td><code>number</code></td><td><code>23330835</code></td>
+    </tr><tr>
+    <td>MRLJN</td><td><code>number</code></td><td><code>23330834</code></td>
+    </tr><tr>
+    <td>MRM1J</td><td><code>number</code></td><td><code>23332112</code></td>
+    </tr><tr>
+    <td>MRM2J</td><td><code>number</code></td><td><code>23332368</code></td>
+    </tr><tr>
+    <td>MRMJF</td><td><code>number</code></td><td><code>23331091</code></td>
+    </tr><tr>
+    <td>MRMJN</td><td><code>number</code></td><td><code>23331090</code></td>
+    </tr><tr>
+    <td>MRS1JF</td><td><code>number</code></td><td><code>23334419</code></td>
+    </tr><tr>
+    <td>MRS1JN</td><td><code>number</code></td><td><code>23334418</code></td>
+    </tr><tr>
+    <td>MRS2JF</td><td><code>number</code></td><td><code>23334675</code></td>
+    </tr><tr>
+    <td>MRS3JF</td><td><code>number</code></td><td><code>23334931</code></td>
+    </tr><tr>
+    <td>MRSJ</td><td><code>number</code></td><td><code>23331344</code></td>
+    </tr><tr>
+    <td>MRSJF</td><td><code>number</code></td><td><code>23331347</code></td>
+    </tr><tr>
+    <td>MRSJN</td><td><code>number</code></td><td><code>23331346</code></td>
+    </tr><tr>
+    <td>RAW</td><td><code>number</code></td><td><code>6618895</code></td>
+    </tr><tr>
+    <td>RAWAndLargeJPEG</td><td><code>number</code></td><td><code>6553616</code></td>
+    </tr><tr>
+    <td>RAWAndLargeJPEGFine</td><td><code>number</code></td><td><code>6553619</code></td>
+    </tr><tr>
+    <td>RAWAndLargeJPEGNormal</td><td><code>number</code></td><td><code>6553618</code></td>
+    </tr><tr>
+    <td>RAWAndMiddle1JPEG</td><td><code>number</code></td><td><code>6554896</code></td>
+    </tr><tr>
+    <td>RAWAndMiddle2JPEG</td><td><code>number</code></td><td><code>6555152</code></td>
+    </tr><tr>
+    <td>RAWAndMiddleJPEG</td><td><code>number</code></td><td><code>6553872</code></td>
+    </tr><tr>
+    <td>RAWAndMiddleJPEGFine</td><td><code>number</code></td><td><code>6553875</code></td>
+    </tr><tr>
+    <td>RAWAndMiddleJPEGNormal</td><td><code>number</code></td><td><code>6553874</code></td>
+    </tr><tr>
+    <td>RAWAndSmall1JPEG</td><td><code>number</code></td><td><code>6557200</code></td>
+    </tr><tr>
+    <td>RAWAndSmall1JPEGFine</td><td><code>number</code></td><td><code>6557203</code></td>
+    </tr><tr>
+    <td>RAWAndSmall1JPEGNormal</td><td><code>number</code></td><td><code>6557202</code></td>
+    </tr><tr>
+    <td>RAWAndSmall2JPEG</td><td><code>number</code></td><td><code>6557456</code></td>
+    </tr><tr>
+    <td>RAWAndSmall2JPEGFine</td><td><code>number</code></td><td><code>6557459</code></td>
+    </tr><tr>
+    <td>RAWAndSmall3JPEGFine</td><td><code>number</code></td><td><code>6557715</code></td>
+    </tr><tr>
+    <td>RAWAndSmallJPEG</td><td><code>number</code></td><td><code>6554128</code></td>
+    </tr><tr>
+    <td>RAWAndSmallJPEGFine</td><td><code>number</code></td><td><code>6554131</code></td>
+    </tr><tr>
+    <td>RAWAndSmallJPEGNormal</td><td><code>number</code></td><td><code>6554130</code></td>
+    </tr><tr>
+    <td>RHEIFL</td><td><code>number</code></td><td><code>6553728</code></td>
+    </tr><tr>
+    <td>RHEIFLF</td><td><code>number</code></td><td><code>6553731</code></td>
+    </tr><tr>
+    <td>RHEIFLN</td><td><code>number</code></td><td><code>6553730</code></td>
+    </tr><tr>
+    <td>RHEIFMF</td><td><code>number</code></td><td><code>6553987</code></td>
+    </tr><tr>
+    <td>RHEIFMN</td><td><code>number</code></td><td><code>6553986</code></td>
+    </tr><tr>
+    <td>RHEIFS1F</td><td><code>number</code></td><td><code>6557315</code></td>
+    </tr><tr>
+    <td>RHEIFS1N</td><td><code>number</code></td><td><code>6557314</code></td>
+    </tr><tr>
+    <td>RHEIFS2F</td><td><code>number</code></td><td><code>6557571</code></td>
+    </tr><tr>
+    <td>Small1JPEGFine</td><td><code>number</code></td><td><code>236191503</code></td>
+    </tr><tr>
+    <td>Small1JPEGNormal</td><td><code>number</code></td><td><code>236125967</code></td>
+    </tr><tr>
+    <td>Small2JPEGFine</td><td><code>number</code></td><td><code>252968719</code></td>
+    </tr><tr>
+    <td>Small3JPEGFine</td><td><code>number</code></td><td><code>269745935</code></td>
+    </tr><tr>
+    <td>SmallJPEG</td><td><code>number</code></td><td><code>34668303</code></td>
+    </tr><tr>
+    <td>SmallJPEG1</td><td><code>number</code></td><td><code>235994895</code></td>
+    </tr><tr>
+    <td>SmallJPEG2</td><td><code>number</code></td><td><code>252772111</code></td>
+    </tr><tr>
+    <td>SmallJPEGFine</td><td><code>number</code></td><td><code>34864911</code></td>
+    </tr><tr>
+    <td>SmallJPEGNormal</td><td><code>number</code></td><td><code>34799375</code></td>
+    </tr><tr>
+    <td>SR</td><td><code>number</code></td><td><code>40173327</code></td>
+    </tr><tr>
+    <td>SRLJ</td><td><code>number</code></td><td><code>40108048</code></td>
+    </tr><tr>
+    <td>SRLJF</td><td><code>number</code></td><td><code>40108051</code></td>
+    </tr><tr>
+    <td>SRLJN</td><td><code>number</code></td><td><code>40108050</code></td>
+    </tr><tr>
+    <td>SRM1J</td><td><code>number</code></td><td><code>40109328</code></td>
+    </tr><tr>
+    <td>SRM2J</td><td><code>number</code></td><td><code>40109584</code></td>
+    </tr><tr>
+    <td>SRMJF</td><td><code>number</code></td><td><code>40108307</code></td>
+    </tr><tr>
+    <td>SRMJN</td><td><code>number</code></td><td><code>40108306</code></td>
+    </tr><tr>
+    <td>SRS1JF</td><td><code>number</code></td><td><code>40111635</code></td>
+    </tr><tr>
+    <td>SRS1JN</td><td><code>number</code></td><td><code>40111634</code></td>
+    </tr><tr>
+    <td>SRS2JF</td><td><code>number</code></td><td><code>40111891</code></td>
+    </tr><tr>
+    <td>SRS3JF</td><td><code>number</code></td><td><code>40112147</code></td>
+    </tr><tr>
+    <td>SRSJ</td><td><code>number</code></td><td><code>40108560</code></td>
+    </tr><tr>
+    <td>SRSJF</td><td><code>number</code></td><td><code>40108563</code></td>
+    </tr><tr>
+    <td>SRSJN</td><td><code>number</code></td><td><code>40108562</code></td>
+    </tr><tr>
+    <td>Unknown</td><td><code>number</code></td><td><code>4294967295</code></td>
+    </tr>  </tbody>
+</table>
+
+<a name="ImageQuality.Format"></a>
+
+## ImageQuality.Format : <code>enum</code>
+**Kind**: static enum of [<code>ImageQuality</code>](#ImageQuality)  
+**Read only**: true  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>CR2</td><td><code>number</code></td><td><code>6</code></td>
+    </tr><tr>
+    <td>CRW</td><td><code>number</code></td><td><code>2</code></td>
+    </tr><tr>
+    <td>HEIF</td><td><code>number</code></td><td><code>8</code></td>
+    </tr><tr>
+    <td>JPEG</td><td><code>number</code></td><td><code>1</code></td>
+    </tr><tr>
+    <td>RAW</td><td><code>number</code></td><td><code>4</code></td>
+    </tr><tr>
+    <td>Unknown</td><td><code>number</code></td><td><code>0</code></td>
+    </tr>  </tbody>
+</table>
+
+<a name="ImageQuality.Size"></a>
+
+## ImageQuality.Size : <code>enum</code>
+**Kind**: static enum of [<code>ImageQuality</code>](#ImageQuality)  
+**Read only**: true  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>Large</td><td><code>number</code></td><td><code>0</code></td>
+    </tr><tr>
+    <td>Middle</td><td><code>number</code></td><td><code>1</code></td>
+    </tr><tr>
+    <td>Middle1</td><td><code>number</code></td><td><code>5</code></td>
+    </tr><tr>
+    <td>Middle2</td><td><code>number</code></td><td><code>6</code></td>
+    </tr><tr>
+    <td>Small</td><td><code>number</code></td><td><code>2</code></td>
+    </tr><tr>
+    <td>Small1</td><td><code>number</code></td><td><code>14</code></td>
+    </tr><tr>
+    <td>Small2</td><td><code>number</code></td><td><code>15</code></td>
+    </tr><tr>
+    <td>Small3</td><td><code>number</code></td><td><code>16</code></td>
+    </tr><tr>
+    <td>Unknown</td><td><code>number</code></td><td><code>4294967295</code></td>
+    </tr>  </tbody>
+</table>
+
+<a name="ImageQuality.CompressionQuality"></a>
+
+## ImageQuality.CompressionQuality : <code>enum</code>
+**Kind**: static enum of [<code>ImageQuality</code>](#ImageQuality)  
+**Read only**: true  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>Fine</td><td><code>number</code></td><td><code>3</code></td>
+    </tr><tr>
+    <td>Lossless</td><td><code>number</code></td><td><code>4</code></td>
+    </tr><tr>
+    <td>Normal</td><td><code>number</code></td><td><code>2</code></td>
+    </tr><tr>
+    <td>SuperFine</td><td><code>number</code></td><td><code>5</code></td>
+    </tr><tr>
+    <td>Unknown</td><td><code>number</code></td><td><code>4294967295</code></td>
+    </tr>  </tbody>
+</table>
+
 <a name="LiveViewImage"></a>
 
 # LiveViewImage
@@ -3087,6 +3339,8 @@ Create instance for label.
     * [.zoomPosition](#LiveViewImage+zoomPosition) ⇒ <code>Position</code>
     * [.zoomArea](#LiveViewImage+zoomArea) ⇒ <code>Rectangle</code>
     * [.getDataURL()](#LiveViewImage+getDataURL) ⇒ <code>string</code>
+    * [.getJPEGBuffer()](#LiveViewImage+getJPEGBuffer) ⇒ <code>Uint8Array</code>
+    * [.getBlob()](#LiveViewImage+getBlob) ⇒ <code>Uint8Array</code>
 
 <a name="new_LiveViewImage_new"></a>
 
@@ -3152,6 +3406,20 @@ Return as data url, the image will be base64 encoded.
 
 **Kind**: instance method of [<code>LiveViewImage</code>](#LiveViewImage)  
 **Returns**: <code>string</code> - data url  
+<a name="LiveViewImage+getJPEGBuffer"></a>
+
+## liveViewImage.getJPEGBuffer() ⇒ <code>Uint8Array</code>
+Return the raw JPEG bytes without base64 encoding.
+
+**Kind**: instance method of [<code>LiveViewImage</code>](#LiveViewImage)  
+**Returns**: <code>Uint8Array</code> - jpeg bytes  
+<a name="LiveViewImage+getBlob"></a>
+
+## liveViewImage.getBlob() ⇒ <code>Uint8Array</code>
+Return image data as binary buffer/blob instead of base64 format.
+
+**Kind**: instance method of [<code>LiveViewImage</code>](#LiveViewImage)  
+**Returns**: <code>Uint8Array</code> - jpeg bytes  
 <a name="ObjectEvent"></a>
 
 # ObjectEvent ⇐ [<code>ApiIdentifier</code>](#ApiIdentifier)
@@ -3217,7 +3485,8 @@ Encapsulate Object Event Identifiers For Easy Read And Debug
 <a name="ApiIdentifier+Symbol_toPrimitive"></a>
 
 ## objectEvent.Symbol\_toPrimitive(hint) ⇒ <code>string</code> \| <code>number</code> \| <code>null</code>
-Allows type cast to number and string.The string will be a hexadecimal code representation of the number
+Allows type cast to number and string.
+The string will be a hexadecimal code representation of the number
 
 **Kind**: instance method of [<code>ObjectEvent</code>](#ObjectEvent)  
 <table>
@@ -3313,12 +3582,15 @@ Allows type cast to number and string.The string will be a hexadecimal code rep
         * [.Record](#Option.Record) : <code>enum</code>
         * [.SaveTo](#Option.SaveTo) : <code>enum</code>
         * [.WhiteBalance](#Option.WhiteBalance) : <code>enum</code>
+        * [.Aspect](#Option.Aspect) : <code>enum</code>
         * [.forLabel(label)](#Option.forLabel) ⇒ [<code>Option</code>](#Option) \| <code>null</code>
 
 <a name="new_Option_new"></a>
 
 ## new Option(propertyID_, value_)
-Option represents a property value from a property specific list.It provides constants for all possible property values. However it dependson the camera and the camera status which option values are available.
+Option represents a property value from a property specific list.
+It provides constants for all possible property values. However it depends
+on the camera and the camera status which option values are available.
 
 <table>
   <thead>
@@ -3452,9 +3724,9 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>RoughMonoChrome</td><td><code>number</code></td><td><code>30</code></td>
     </tr><tr>
-    <td>SCN</td><td><code>number</code></td><td><code>25</code></td>
-    </tr><tr>
     <td>SceneIntelligentAuto</td><td><code>number</code></td><td><code>22</code></td>
+    </tr><tr>
+    <td>SCN</td><td><code>number</code></td><td><code>25</code></td>
     </tr><tr>
     <td>Silent</td><td><code>number</code></td><td><code>54</code></td>
     </tr><tr>
@@ -3591,9 +3863,9 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>RoughMonoChrome</td><td><code>number</code></td><td><code>30</code></td>
     </tr><tr>
-    <td>SCN</td><td><code>number</code></td><td><code>25</code></td>
-    </tr><tr>
     <td>SceneIntelligentAuto</td><td><code>number</code></td><td><code>22</code></td>
+    </tr><tr>
+    <td>SCN</td><td><code>number</code></td><td><code>25</code></td>
     </tr><tr>
     <td>Silent</td><td><code>number</code></td><td><code>54</code></td>
     </tr><tr>
@@ -3717,9 +3989,9 @@ Option represents a property value from a property specific list.It provides co
 <tr>
     <td>AdobeRGB</td><td><code>number</code></td><td><code>2</code></td>
     </tr><tr>
-    <td>Unknown</td><td><code>number</code></td><td><code>4294967295</code></td>
-    </tr><tr>
     <td>sRGB</td><td><code>number</code></td><td><code>1</code></td>
+    </tr><tr>
+    <td>Unknown</td><td><code>number</code></td><td><code>4294967295</code></td>
     </tr>  </tbody>
 </table>
 
@@ -3769,9 +4041,9 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>LowSpeedContinuous</td><td><code>number</code></td><td><code>5</code></td>
     </tr><tr>
-    <td>SelfTimer10sec</td><td><code>number</code></td><td><code>16</code></td>
-    </tr><tr>
     <td>SelfTimer2sec</td><td><code>number</code></td><td><code>17</code></td>
+    </tr><tr>
+    <td>SelfTimer10sec</td><td><code>number</code></td><td><code>16</code></td>
     </tr><tr>
     <td>SelfTimerContinuous</td><td><code>number</code></td><td><code>7</code></td>
     </tr><tr>
@@ -3897,9 +4169,9 @@ Option represents a property value from a property specific list.It provides co
 <tr>
     <td>Fit</td><td><code>number</code></td><td><code>1</code></td>
     </tr><tr>
-    <td>x10</td><td><code>number</code></td><td><code>10</code></td>
-    </tr><tr>
     <td>x5</td><td><code>number</code></td><td><code>5</code></td>
+    </tr><tr>
+    <td>x10</td><td><code>number</code></td><td><code>10</code></td>
     </tr>  </tbody>
 </table>
 
@@ -4010,13 +4282,21 @@ Option represents a property value from a property specific list.It provides co
   </thead>
   <tbody>
 <tr>
-    <td>"1280x720 100.0fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>71696</code></td>
+    <td>"23.98fps (RAW)"</td><td><code>number</code></td><td><code>668272</code></td>
     </tr><tr>
-    <td>"1280x720 100.0fps Standard(IPB)"</td><td><code>number</code></td><td><code>71728</code></td>
+    <td>"24.00fps (RAW)"</td><td><code>number</code></td><td><code>668528</code></td>
     </tr><tr>
-    <td>"1280x720 119.9fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>71952</code></td>
+    <td>"25.00fps (RAW)"</td><td><code>number</code></td><td><code>668784</code></td>
     </tr><tr>
-    <td>"1280x720 119.9fps Standard(IPB)"</td><td><code>number</code></td><td><code>71984</code></td>
+    <td>"29.97fps (RAW)"</td><td><code>number</code></td><td><code>669040</code></td>
+    </tr><tr>
+    <td>"50.00fps (RAW)"</td><td><code>number</code></td><td><code>669296</code></td>
+    </tr><tr>
+    <td>"59.94fps (RAW)"</td><td><code>number</code></td><td><code>669552</code></td>
+    </tr><tr>
+    <td>"640x480 25.00fps"</td><td><code>number</code></td><td><code>132096</code></td>
+    </tr><tr>
+    <td>"640x480 29.97ffps"</td><td><code>number</code></td><td><code>132352</code></td>
     </tr><tr>
     <td>"1280x720 25.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>70704</code></td>
     </tr><tr>
@@ -4036,9 +4316,13 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>"1280x720 59.94fps Standard(IPB)"</td><td><code>number</code></td><td><code>71472</code></td>
     </tr><tr>
-    <td>"1920x1080 100.0fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>6160</code></td>
+    <td>"1280x720 100.0fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>67600</code></td>
     </tr><tr>
-    <td>"1920x1080 119.9fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>6416</code></td>
+    <td>"1280x720 100.0fps Standard(IPB)"</td><td><code>number</code></td><td><code>71728</code></td>
+    </tr><tr>
+    <td>"1280x720 119.9fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>71952</code></td>
+    </tr><tr>
+    <td>"1280x720 119.9fps Standard(IPB)"</td><td><code>number</code></td><td><code>71984</code></td>
     </tr><tr>
     <td>"1920x1080 23.98fps"</td><td><code>number</code></td><td><code>512</code></td>
     </tr><tr>
@@ -4046,7 +4330,7 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>"1920x1080 23.98fps For editing(ALL-I)Crop"</td><td><code>number</code></td><td><code>134222352</code></td>
     </tr><tr>
-    <td>"1920x1080 23.98fps Standard(IPB)"</td><td><code>number</code></td><td><code>4656</code></td>
+    <td>"1920x1080 23.98fps Standard(IPB)"</td><td><code>number</code></td><td><code>560</code></td>
     </tr><tr>
     <td>"1920x1080 23.98fps Standard(IPB)Crop"</td><td><code>number</code></td><td><code>134222384</code></td>
     </tr><tr>
@@ -4054,7 +4338,7 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>"1920x1080 24.00fps For editing(ALL-I)Crop"</td><td><code>number</code></td><td><code>134222864</code></td>
     </tr><tr>
-    <td>"1920x1080 24.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>4912</code></td>
+    <td>"1920x1080 24.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>816</code></td>
     </tr><tr>
     <td>"1920x1080 24.00fps Standard(IPB)Crop"</td><td><code>number</code></td><td><code>134222896</code></td>
     </tr><tr>
@@ -4066,7 +4350,7 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>"1920x1080 25.00fps Light(IPB)"</td><td><code>number</code></td><td><code>5169</code></td>
     </tr><tr>
-    <td>"1920x1080 25.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>5168</code></td>
+    <td>"1920x1080 25.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>1072</code></td>
     </tr><tr>
     <td>"1920x1080 25.00fps Standard(IPB)Crop"</td><td><code>number</code></td><td><code>134223120</code></td>
     </tr><tr>
@@ -4074,53 +4358,45 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>"1920x1080 29.97fps"</td><td><code>number</code></td><td><code>1280</code></td>
     </tr><tr>
-    <td>"1920x1080 29.97fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>1296</code></td>
+    <td>"1920x1080 29.97fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>5392</code></td>
     </tr><tr>
     <td>"1920x1080 29.97fps For editing(ALL-I)Crop"</td><td><code>number</code></td><td><code>134223152</code></td>
     </tr><tr>
     <td>"1920x1080 29.97fps Light(IPB)"</td><td><code>number</code></td><td><code>5425</code></td>
     </tr><tr>
-    <td>"1920x1080 29.97fps Standard(IPB)"</td><td><code>number</code></td><td><code>5424</code></td>
+    <td>"1920x1080 29.97fps Standard(IPB)"</td><td><code>number</code></td><td><code>1328</code></td>
     </tr><tr>
-    <td>"1920x1080 50.00fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>5648</code></td>
+    <td>"1920x1080 50.00fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>1552</code></td>
     </tr><tr>
     <td>"1920x1080 50.00fps For editing(ALL-I)Crop"</td><td><code>number</code></td><td><code>134223376</code></td>
     </tr><tr>
-    <td>"1920x1080 50.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>5680</code></td>
+    <td>"1920x1080 50.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>1584</code></td>
     </tr><tr>
     <td>"1920x1080 50.00fps Standard(IPB)Crop"</td><td><code>number</code></td><td><code>134223408</code></td>
     </tr><tr>
-    <td>"1920x1080 59.94fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>5904</code></td>
+    <td>"1920x1080 59.94fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>1808</code></td>
     </tr><tr>
     <td>"1920x1080 59.94fps For editing(ALL-I)Crop"</td><td><code>number</code></td><td><code>134223632</code></td>
     </tr><tr>
-    <td>"1920x1080 59.94fps Standard(IPB)"</td><td><code>number</code></td><td><code>5936</code></td>
+    <td>"1920x1080 59.94fps Standard(IPB)"</td><td><code>number</code></td><td><code>1840</code></td>
     </tr><tr>
     <td>"1920x1080 59.94fps Standard(IPB)Crop"</td><td><code>number</code></td><td><code>134223664</code></td>
     </tr><tr>
-    <td>"23.98fps (RAW)"</td><td><code>number</code></td><td><code>668272</code></td>
+    <td>"1920x1080 100.0fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>6160</code></td>
     </tr><tr>
-    <td>"24.00fps (RAW)"</td><td><code>number</code></td><td><code>668528</code></td>
+    <td>"1920x1080 119.9fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>6416</code></td>
     </tr><tr>
-    <td>"25.00fps (RAW)"</td><td><code>number</code></td><td><code>668784</code></td>
+    <td>"3840x2160 23.98fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>332304</code></td>
     </tr><tr>
-    <td>"29.97fps (RAW)"</td><td><code>number</code></td><td><code>669040</code></td>
-    </tr><tr>
-    <td>"3840x2160 100.0fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>333840</code></td>
-    </tr><tr>
-    <td>"3840x2160 119.9fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>334096</code></td>
-    </tr><tr>
-    <td>"3840x2160 23.98fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>134550032</code></td>
-    </tr><tr>
-    <td>"3840x2160 23.98fps Standard(IPB)"</td><td><code>number</code></td><td><code>134550064</code></td>
+    <td>"3840x2160 23.98fps Standard(IPB)"</td><td><code>number</code></td><td><code>332336</code></td>
     </tr><tr>
     <td>"3840x2160 24.00fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>332560</code></td>
     </tr><tr>
     <td>"3840x2160 24.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>332592</code></td>
     </tr><tr>
-    <td>"3840x2160 25.00fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>134550544</code></td>
+    <td>"3840x2160 25.00fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>332816</code></td>
     </tr><tr>
-    <td>"3840x2160 25.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>134550576</code></td>
+    <td>"3840x2160 25.00fps Standard(IPB)"</td><td><code>number</code></td><td><code>332848</code></td>
     </tr><tr>
     <td>"3840x2160 29.97fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>134550800</code></td>
     </tr><tr>
@@ -4132,11 +4408,11 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>"3840x2160 59.94fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>134551312</code></td>
     </tr><tr>
-    <td>"3840x2160 59.94fps Standard(IPB)"</td><td><code>number</code></td><td><code>134551344</code></td>
+    <td>"3840x2160 59.94fps Standard(IPB)"</td><td><code>number</code></td><td><code>333616</code></td>
     </tr><tr>
-    <td>"4096x2160 100.0fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>202768</code></td>
+    <td>"3840x2160 100.0fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>333840</code></td>
     </tr><tr>
-    <td>"4096x2160 119.9fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>203024</code></td>
+    <td>"3840x2160 119.9fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>334096</code></td>
     </tr><tr>
     <td>"4096x2160 23.98fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>201232</code></td>
     </tr><tr>
@@ -4170,13 +4446,13 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>"4096x2160 29.94fps Standard(IPB)Crop"</td><td><code>number</code></td><td><code>134419760</code></td>
     </tr><tr>
-    <td>"4096x2160 29.970fps Standard(IPB)"</td><td><code>number</code></td><td><code>202032</code></td>
-    </tr><tr>
     <td>"4096x2160 29.97fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>202000</code></td>
     </tr><tr>
     <td>"4096x2160 29.97fps For editing(ALL-I)Crop"</td><td><code>number</code></td><td><code>134419728</code></td>
     </tr><tr>
     <td>"4096x2160 29.97fps Motion JPEG"</td><td><code>number</code></td><td><code>197952</code></td>
+    </tr><tr>
+    <td>"4096x2160 29.970fps Standard(IPB)"</td><td><code>number</code></td><td><code>202032</code></td>
     </tr><tr>
     <td>"4096x2160 50.00fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>202256</code></td>
     </tr><tr>
@@ -4194,13 +4470,9 @@ Option represents a property value from a property specific list.It provides co
     </tr><tr>
     <td>"4096x2160 59.94fps Standard(IPB)Crop"</td><td><code>number</code></td><td><code>134420272</code></td>
     </tr><tr>
-    <td>"50.00fps (RAW)"</td><td><code>number</code></td><td><code>669296</code></td>
+    <td>"4096x2160 100.0fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>202768</code></td>
     </tr><tr>
-    <td>"59.94fps (RAW)"</td><td><code>number</code></td><td><code>669552</code></td>
-    </tr><tr>
-    <td>"640x480 25.00fps"</td><td><code>number</code></td><td><code>132096</code></td>
-    </tr><tr>
-    <td>"640x480 29.97ffps"</td><td><code>number</code></td><td><code>132352</code></td>
+    <td>"4096x2160 119.9fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>203024</code></td>
     </tr><tr>
     <td>"7680x4320 23.98fps For editing(ALL-I)"</td><td><code>number</code></td><td><code>594448</code></td>
     </tr><tr>
@@ -4385,6 +4657,33 @@ Option represents a property value from a property specific list.It provides co
     </tr>  </tbody>
 </table>
 
+<a name="Option.Aspect"></a>
+
+## Option.Aspect : <code>enum</code>
+**Kind**: static enum of [<code>Option</code>](#Option)  
+**Read only**: true  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>"4:3"</td><td><code>number</code></td><td><code>2</code></td>
+    </tr><tr>
+    <td>"16:9"</td><td><code>number</code></td><td><code>7</code></td>
+    </tr><tr>
+    <td>apsc</td><td><code>number</code></td><td><code>13</code></td>
+    </tr><tr>
+    <td>full</td><td><code>number</code></td><td><code>0</code></td>
+    </tr><tr>
+    <td>square</td><td><code>number</code></td><td><code>1</code></td>
+    </tr>  </tbody>
+</table>
+
 <a name="Option.forLabel"></a>
 
 ## Option.forLabel(label) ⇒ [<code>Option</code>](#Option) \| <code>null</code>
@@ -4519,6 +4818,7 @@ Create instance for label.
         * [.ID](#ShutterSpeed.ID) : <code>enum</code>
         * [.OneHalfValues](#ShutterSpeed.OneHalfValues) : <code>enum</code>
         * [.OneThirdValues](#ShutterSpeed.OneThirdValues) : <code>enum</code>
+        * [.AllValues](#ShutterSpeed.AllValues) : <code>enum</code>
         * [.forLabel(label)](#ShutterSpeed.forLabel) ⇒ [<code>ShutterSpeed</code>](#ShutterSpeed) \| <code>null</code>
 
 <a name="new_ShutterSpeed_new"></a>
@@ -4765,6 +5065,169 @@ Encapsulate Object for a Shutter Speed value
     </tr>  </tbody>
 </table>
 
+<a name="ShutterSpeed.AllValues"></a>
+
+## ShutterSpeed.AllValues : <code>enum</code>
+**Kind**: static enum of [<code>ShutterSpeed</code>](#ShutterSpeed)  
+**Read only**: true  
+**Properties**
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>16</td><td><code>number</code></td><td><code>30</code></td>
+    </tr><tr>
+    <td>19</td><td><code>number</code></td><td><code>25</code></td>
+    </tr><tr>
+    <td>20</td><td><code>number</code></td><td><code>20</code></td>
+    </tr><tr>
+    <td>21</td><td><code>number</code></td><td><code>20</code></td>
+    </tr><tr>
+    <td>24</td><td><code>number</code></td><td><code>15</code></td>
+    </tr><tr>
+    <td>27</td><td><code>number</code></td><td><code>13</code></td>
+    </tr><tr>
+    <td>28</td><td><code>number</code></td><td><code>10</code></td>
+    </tr><tr>
+    <td>29</td><td><code>number</code></td><td><code>10</code></td>
+    </tr><tr>
+    <td>32</td><td><code>number</code></td><td><code>8</code></td>
+    </tr><tr>
+    <td>35</td><td><code>number</code></td><td><code>6</code></td>
+    </tr><tr>
+    <td>36</td><td><code>number</code></td><td><code>6</code></td>
+    </tr><tr>
+    <td>37</td><td><code>number</code></td><td><code>5</code></td>
+    </tr><tr>
+    <td>40</td><td><code>number</code></td><td><code>4</code></td>
+    </tr><tr>
+    <td>43</td><td><code>number</code></td><td><code>3.2</code></td>
+    </tr><tr>
+    <td>44</td><td><code>number</code></td><td><code>3</code></td>
+    </tr><tr>
+    <td>45</td><td><code>number</code></td><td><code>2.5</code></td>
+    </tr><tr>
+    <td>48</td><td><code>number</code></td><td><code>2</code></td>
+    </tr><tr>
+    <td>51</td><td><code>number</code></td><td><code>1.6</code></td>
+    </tr><tr>
+    <td>52</td><td><code>number</code></td><td><code>1.5</code></td>
+    </tr><tr>
+    <td>53</td><td><code>number</code></td><td><code>1.3</code></td>
+    </tr><tr>
+    <td>56</td><td><code>number</code></td><td><code>1</code></td>
+    </tr><tr>
+    <td>59</td><td><code>number</code></td><td><code>0.8</code></td>
+    </tr><tr>
+    <td>60</td><td><code>number</code></td><td><code>0.7</code></td>
+    </tr><tr>
+    <td>61</td><td><code>number</code></td><td><code>0.6</code></td>
+    </tr><tr>
+    <td>64</td><td><code>number</code></td><td><code>0.5</code></td>
+    </tr><tr>
+    <td>67</td><td><code>number</code></td><td><code>0.4</code></td>
+    </tr><tr>
+    <td>68</td><td><code>number</code></td><td><code>0.3</code></td>
+    </tr><tr>
+    <td>69</td><td><code>number</code></td><td><code>0.3</code></td>
+    </tr><tr>
+    <td>72</td><td><code>number</code></td><td><code>0.25</code></td>
+    </tr><tr>
+    <td>75</td><td><code>number</code></td><td><code>0.2</code></td>
+    </tr><tr>
+    <td>76</td><td><code>number</code></td><td><code>0.16666666666666666</code></td>
+    </tr><tr>
+    <td>77</td><td><code>number</code></td><td><code>0.16666666666666666</code></td>
+    </tr><tr>
+    <td>80</td><td><code>number</code></td><td><code>0.125</code></td>
+    </tr><tr>
+    <td>83</td><td><code>number</code></td><td><code>0.1</code></td>
+    </tr><tr>
+    <td>84</td><td><code>number</code></td><td><code>0.1</code></td>
+    </tr><tr>
+    <td>85</td><td><code>number</code></td><td><code>0.07692307692307693</code></td>
+    </tr><tr>
+    <td>88</td><td><code>number</code></td><td><code>0.06666666666666667</code></td>
+    </tr><tr>
+    <td>91</td><td><code>number</code></td><td><code>0.05</code></td>
+    </tr><tr>
+    <td>92</td><td><code>number</code></td><td><code>0.05</code></td>
+    </tr><tr>
+    <td>93</td><td><code>number</code></td><td><code>0.04</code></td>
+    </tr><tr>
+    <td>96</td><td><code>number</code></td><td><code>0.03333333333333333</code></td>
+    </tr><tr>
+    <td>99</td><td><code>number</code></td><td><code>0.025</code></td>
+    </tr><tr>
+    <td>100</td><td><code>number</code></td><td><code>0.022222222222222223</code></td>
+    </tr><tr>
+    <td>101</td><td><code>number</code></td><td><code>0.02</code></td>
+    </tr><tr>
+    <td>104</td><td><code>number</code></td><td><code>0.016666666666666666</code></td>
+    </tr><tr>
+    <td>107</td><td><code>number</code></td><td><code>0.0125</code></td>
+    </tr><tr>
+    <td>108</td><td><code>number</code></td><td><code>0.011111111111111112</code></td>
+    </tr><tr>
+    <td>109</td><td><code>number</code></td><td><code>0.01</code></td>
+    </tr><tr>
+    <td>112</td><td><code>number</code></td><td><code>0.008</code></td>
+    </tr><tr>
+    <td>115</td><td><code>number</code></td><td><code>0.00625</code></td>
+    </tr><tr>
+    <td>116</td><td><code>number</code></td><td><code>0.005555555555555556</code></td>
+    </tr><tr>
+    <td>117</td><td><code>number</code></td><td><code>0.005</code></td>
+    </tr><tr>
+    <td>120</td><td><code>number</code></td><td><code>0.004</code></td>
+    </tr><tr>
+    <td>123</td><td><code>number</code></td><td><code>0.003125</code></td>
+    </tr><tr>
+    <td>124</td><td><code>number</code></td><td><code>0.002857142857142857</code></td>
+    </tr><tr>
+    <td>125</td><td><code>number</code></td><td><code>0.0025</code></td>
+    </tr><tr>
+    <td>128</td><td><code>number</code></td><td><code>0.002</code></td>
+    </tr><tr>
+    <td>131</td><td><code>number</code></td><td><code>0.0015625</code></td>
+    </tr><tr>
+    <td>132</td><td><code>number</code></td><td><code>0.0013333333333333333</code></td>
+    </tr><tr>
+    <td>133</td><td><code>number</code></td><td><code>0.00125</code></td>
+    </tr><tr>
+    <td>136</td><td><code>number</code></td><td><code>0.001</code></td>
+    </tr><tr>
+    <td>139</td><td><code>number</code></td><td><code>0.0008</code></td>
+    </tr><tr>
+    <td>140</td><td><code>number</code></td><td><code>0.0006666666666666666</code></td>
+    </tr><tr>
+    <td>141</td><td><code>number</code></td><td><code>0.000625</code></td>
+    </tr><tr>
+    <td>144</td><td><code>number</code></td><td><code>0.0005</code></td>
+    </tr><tr>
+    <td>147</td><td><code>number</code></td><td><code>0.0004</code></td>
+    </tr><tr>
+    <td>148</td><td><code>number</code></td><td><code>0.0003333333333333333</code></td>
+    </tr><tr>
+    <td>149</td><td><code>number</code></td><td><code>0.0003125</code></td>
+    </tr><tr>
+    <td>152</td><td><code>number</code></td><td><code>0.00025</code></td>
+    </tr><tr>
+    <td>155</td><td><code>number</code></td><td><code>0.0002</code></td>
+    </tr><tr>
+    <td>156</td><td><code>number</code></td><td><code>0.00016666666666666666</code></td>
+    </tr><tr>
+    <td>157</td><td><code>number</code></td><td><code>0.00015625</code></td>
+    </tr><tr>
+    <td>160</td><td><code>number</code></td><td><code>0.000125</code></td>
+    </tr>  </tbody>
+</table>
+
 <a name="ShutterSpeed.forLabel"></a>
 
 ## ShutterSpeed.forLabel(label) ⇒ [<code>ShutterSpeed</code>](#ShutterSpeed) \| <code>null</code>
@@ -4848,7 +5311,8 @@ Encapsulate Object Event Identifiers For Easy Read And Debug
 <a name="ApiIdentifier+Symbol_toPrimitive"></a>
 
 ## stateEvent.Symbol\_toPrimitive(hint) ⇒ <code>string</code> \| <code>number</code> \| <code>null</code>
-Allows type cast to number and string.The string will be a hexadecimal code representation of the number
+Allows type cast to number and string.
+The string will be a hexadecimal code representation of the number
 
 **Kind**: instance method of [<code>StateEvent</code>](#StateEvent)  
 <table>
@@ -4896,9 +5360,9 @@ Allows type cast to number and string.The string will be a hexadecimal code rep
     </tr><tr>
     <td>PowerZoomInfoChanged</td><td><code>number</code></td><td><code>785</code></td>
     </tr><tr>
-    <td>ShutDownTimerUpdate</td><td><code>number</code></td><td><code>772</code></td>
-    </tr><tr>
     <td>Shutdown</td><td><code>number</code></td><td><code>769</code></td>
+    </tr><tr>
+    <td>ShutDownTimerUpdate</td><td><code>number</code></td><td><code>772</code></td>
     </tr><tr>
     <td>WillSoonShutDown</td><td><code>number</code></td><td><code>771</code></td>
     </tr>  </tbody>

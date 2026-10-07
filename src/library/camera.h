@@ -41,7 +41,8 @@ namespace CameraApi {
                 return edsCamera_;
             }
 
-            inline bool isLiveViewActive() const {
+            inline bool isLiveViewActive() {
+                updateLiveViewStatus();
                 return hasActiveLiveView_;
             }
 

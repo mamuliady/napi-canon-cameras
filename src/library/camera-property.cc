@@ -334,7 +334,9 @@ namespace CameraApi {
         EdsDataType dataType;
         EdsUInt32 dataSize;
 
-        if (Option::IsClassOf(propertyValue)) {
+        if (propertyValue.IsObject() && propertyValue.As<Napi::Object>().Has("value")) {
+            value = propertyValue.As<Napi::Object>().Get("value");
+        } else if (Option::IsClassOf(propertyValue)) {
             value = propertyValue.As<Napi::Object>().Get("value");
         }
 
@@ -342,22 +344,12 @@ namespace CameraApi {
             edsCamera_, propertyIdentifier_, propertySpecifier_, &dataType, &dataSize
         );
 
+        if (propertyIdentifier_ == kEdsPropID_SaveTo || (dataType == kEdsDataType_Unknown && value.IsNumber())) {
+            dataType = kEdsDataType_UInt32;
+            dataSize = sizeof(EdsUInt32);
+        }
+
         if (isLookUpProperty()) {
-            // EdsPropertyDesc propertyDescription;
-            // EdsError error = EdsGetPropertyDesc(edsCamera_, propertyIdentifier_, &propertyDescription);
-            // std::string message = "isLookUpProperty ";
-            // for (int i = 0; i < propertyDescription.numElements; ++i) {
-            //     std::string kmessage = "| ";
-            //     kmessage.append(std::to_string(propertyDescription.propDesc[i]));
-            //     message.append(kmessage);
-
-            // }
-
-            // // ApiError::ThrowIfFailed(info.Env(), propertyDescription);
-            // message.append(CodeToHexLabel(propertyIdentifier_));
-            // message.append(std::to_string(error));
-
-            // throw Napi::Error::New(env, message);
             if (!isAllowedPropertyValue(value.As<Napi::Number>().Int32Value())) {
                 ApiError::ThrowIfFailed(info.Env(), EDS_ERR_INVALID_DEVICEPROP_VALUE);
             }
@@ -374,7 +366,7 @@ namespace CameraApi {
                 break;
             case kEdsDataType_UInt32:
                 if (value.IsNumber()) {
-                    EdsInt32 uint32_value = value.As<Napi::Number>().Uint32Value();
+                    EdsUInt32 uint32_value = value.As<Napi::Number>().Uint32Value();
                     error = EdsSetPropertyData(
                         edsCamera_, propertyIdentifier_, propertySpecifier_, dataSize, &uint32_value
                     );

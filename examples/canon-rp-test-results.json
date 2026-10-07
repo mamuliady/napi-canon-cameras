@@ -1,0 +1,806 @@
+[
+  {
+    "category": "Discovery",
+    "feature": "cameraBrowser.getCameras()",
+    "status": "PASS",
+    "details": "Found 1 camera: Canon EOS RP"
+  },
+  {
+    "category": "Identification",
+    "feature": "camera.description",
+    "status": "PASS",
+    "details": "Canon EOS RP"
+  },
+  {
+    "category": "Identification",
+    "feature": "camera.portName",
+    "status": "PASS",
+    "details": "0"
+  },
+  {
+    "category": "Lifecycle",
+    "feature": "camera.connect()",
+    "status": "PASS",
+    "details": "Session opened"
+  },
+  {
+    "category": "Events",
+    "feature": "camera.setEventHandler()",
+    "status": "PASS",
+    "details": "Listener attached"
+  },
+  {
+    "category": "Commands",
+    "feature": "ExtendShutDownTimer",
+    "status": "PASS",
+    "details": "Shutdown timer extended"
+  },
+  {
+    "category": "Commands",
+    "feature": "PressShutterButton (Halfway -> OFF)",
+    "status": "PASS",
+    "details": "Half-press autofocus / meter trigger succeeded"
+  },
+  {
+    "category": "Property Read",
+    "feature": "AEBracket",
+    "status": "PASS",
+    "details": "Value: 0 (10 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "AEMode",
+    "status": "PASS",
+    "details": "Value: AEMode.Manual (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "AEModeSelect",
+    "status": "PASS",
+    "details": "Value: AEModeSelect.Manual (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "AFMode",
+    "status": "PASS",
+    "details": "Value: AFMode.OneShot (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Artist",
+    "status": "PASS",
+    "details": "Value:  (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Aspect",
+    "status": "PASS",
+    "details": "Value: apsc (5 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "AutoPowerOffSetting",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Av",
+    "status": "PASS",
+    "details": "Value: f2.8 (23 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "AvailableShots",
+    "status": "PASS",
+    "details": "Value: 1106947 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "BatteryLevel",
+    "status": "PASS",
+    "details": "Value: 80 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "BatteryQuality",
+    "status": "PASS",
+    "details": "Value: BatteryQuality.Full (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "BodyIDEx",
+    "status": "PASS",
+    "details": "Value: 528021001669 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Bracket",
+    "status": "PASS",
+    "details": "Value: 0x00000000 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "CFn",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ColorSpace",
+    "status": "PASS",
+    "details": "Value: ColorSpace.sRGB (2 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ColorTemperature",
+    "status": "PASS",
+    "details": "Value: 5200 (76 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Copyright",
+    "status": "PASS",
+    "details": "Value:  (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "CurrentFolder",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "CurrentStorage",
+    "status": "PASS",
+    "details": "Value: SD (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "DC_Strobe",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "DC_Zoom",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "DateTime",
+    "status": "PASS",
+    "details": "Value: {\"year\":2026,\"month\":10,\"day\":7,\"hour\":15,\"minute\":13,\"second\":9,\"milliseconds\":0} (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "DepthOfField",
+    "status": "PASS",
+    "details": "Value: 0 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "DriveMode",
+    "status": "PASS",
+    "details": "Value: DriveMode.SingleShooting (6 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "EFCompensation",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "EVF_RollingPitching",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_AFMode",
+    "status": "PASS",
+    "details": "Value: Evf_AFMode.ZoneAF (6 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_ClickWBCoeffs",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_ColorTemperature",
+    "status": "PASS",
+    "details": "Value: 5200 (76 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_CoordinateSystem",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_DepthOfFieldPreview",
+    "status": "PASS",
+    "details": "Value: false (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_FocusAid",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_Histogram",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_HistogramB",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_HistogramG",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_HistogramR",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_HistogramStatus",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_HistogramY",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_ImageClipRect",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_ImagePosition",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_Mode",
+    "status": "PASS",
+    "details": "Value: true (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_OutputDevice",
+    "status": "PASS",
+    "details": "Value: TFT (12 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_PowerZoom_CurPosition",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_PowerZoom_MaxPosition",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_PowerZoom_MinPosition",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_WhiteBalance",
+    "status": "PASS",
+    "details": "Value: Evf_WhiteBalance.AutoAmbiencePriority (11 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_Zoom",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_ZoomPosition",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Evf_ZoomRect",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ExposureCompensation",
+    "status": "PASS",
+    "details": "Value: 0 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "FEBracket",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "FirmwareVersion",
+    "status": "PASS",
+    "details": "Value: 1.6.1 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "FixedMovie",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "FlashCompensation",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "FlashMode",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "FlashOn",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "FocalLength",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "FocusInfo",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSAltitude",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSAltitudeRef",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSDateStamp",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSLatitude",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSLatitudeRef",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSLongitude",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSLongitudeRef",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSMapDatum",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSSatellites",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSStatus",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSTimeStamp",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "GPSVersionID",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "HDDirectoryStructure",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ICCProfile",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ISOBracket",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ISOSpeed",
+    "status": "PASS",
+    "details": "Value: 1250 (28 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ImageQuality",
+    "status": "PASS",
+    "details": "Value: LargeJPEGFine (11 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "JpegQuality",
+    "status": "PASS",
+    "details": "Value: 0 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "LensBarrelStatus",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "LensName",
+    "status": "PASS",
+    "details": "Value: RF50mm F1.8 STM (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "LensStatus",
+    "status": "PASS",
+    "details": "Value: LensStatus.Attached (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "MakerName",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ManualWhiteBalanceData",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "MeteringMode",
+    "status": "PASS",
+    "details": "Value: MeteringMode.Evaluative (4 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "MirrorLockUpState",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "MirrorUpSetting",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "MovieParam",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "MyMenu",
+    "status": "PASS",
+    "details": "Value: [] (1 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "NoiseReduction",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Orientation",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "OwnerName",
+    "status": "PASS",
+    "details": "Value:  (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "PictureStyle",
+    "status": "PASS",
+    "details": "Value: 133 (11 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "PictureStyleCaption",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "PictureStyleDescription",
+    "status": "PASS",
+    "details": "Value: {\"contrast\":0,\"sharpness\":0,\"saturation\":0,\"colorTone\":0,\"filterEffect\":0,\"toningEffect\":0,\"sharpFineness\":2,\"sharpThreshold\":2} (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "PowerZoom_Speed",
+    "status": "PASS",
+    "details": "Value: 0 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "ProductName",
+    "status": "PASS",
+    "details": "Value: Canon EOS RP (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Record",
+    "status": "PASS",
+    "details": "Value: 0x00000003 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "RedEye",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "SaveTo",
+    "status": "PASS",
+    "details": "Value: SaveTo.Host (1 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "SummerTimeSetting",
+    "status": "PASS",
+    "details": "Value: false (2 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "TemperatureStatus",
+    "status": "PASS",
+    "details": "Value: 0 (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "TimeZone",
+    "status": "PASS",
+    "details": "Value: +00:00 London (33 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "Tv",
+    "status": "PASS",
+    "details": "Value: 1/60 (52 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "UTCTime",
+    "status": "PASS",
+    "details": "Value: {\"year\":2026,\"month\":10,\"day\":7,\"hour\":15,\"minute\":13,\"second\":9,\"milliseconds\":0} (0 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "WhiteBalance",
+    "status": "PASS",
+    "details": "Value: WhiteBalance.AutoAmbiencePriority (10 allowed choices)"
+  },
+  {
+    "category": "Property Read",
+    "feature": "WhiteBalanceBracket",
+    "status": "UNSUPPORTED",
+    "details": "Property marked unavailable on Canon RP"
+  },
+  {
+    "category": "Property Read",
+    "feature": "WhiteBalanceShift",
+    "status": "PASS",
+    "details": "Value: [8,-2] (19 allowed choices)"
+  },
+  {
+    "category": "Property Write",
+    "feature": "ISOSpeed",
+    "status": "PASS",
+    "details": "Changed from 1250 to Auto"
+  },
+  {
+    "category": "Property Write",
+    "feature": "WhiteBalance",
+    "status": "PASS",
+    "details": "Changed to WhiteBalance.AutoWhitePriority"
+  },
+  {
+    "category": "Property Write",
+    "feature": "DriveMode",
+    "status": "PASS",
+    "details": "Available: DriveMode.SingleShooting, DriveMode.HighSpeedContinuous, DriveMode.LowSpeedContinuous, DriveMode.SelfTimer10sec, DriveMode.SelfTimer2sec, DriveMode.SelfTimerContinuous"
+  },
+  {
+    "category": "Property Write",
+    "feature": "SaveTo (Host)",
+    "status": "PASS",
+    "details": "Current: SaveTo.Host"
+  },
+  {
+    "category": "LiveView",
+    "feature": "camera.startLiveView()",
+    "status": "PASS",
+    "details": "EVF session started"
+  },
+  {
+    "category": "LiveView",
+    "feature": "camera.isLiveViewActive()",
+    "status": "PASS",
+    "details": "Active state: true"
+  },
+  {
+    "category": "LiveView",
+    "feature": "camera.getLiveViewImage()",
+    "status": "PASS",
+    "details": "Frame retrieved"
+  },
+  {
+    "category": "LiveView",
+    "feature": "image.getDataURL()",
+    "status": "PASS",
+    "details": "Data URL length: 218787"
+  },
+  {
+    "category": "LiveView",
+    "feature": "image.getBlob()",
+    "status": "PASS",
+    "details": "Size: 164073 bytes, starts with 0xFFD8"
+  },
+  {
+    "category": "LiveView",
+    "feature": "image.getJPEGBuffer()",
+    "status": "PASS",
+    "details": "Size: 164073 bytes, starts with 0xFFD8"
+  },
+  {
+    "category": "LiveView",
+    "feature": "getBlob() === getJPEGBuffer() match",
+    "status": "PASS",
+    "details": "Byte-for-byte identical"
+  },
+  {
+    "category": "LiveView",
+    "feature": "image.coordinateSystem",
+    "status": "PASS",
+    "details": "3888 x 2592"
+  },
+  {
+    "category": "LiveView",
+    "feature": "image.zoom",
+    "status": "PASS",
+    "details": "Zoom factor: Evf_Zoom.Fit"
+  },
+  {
+    "category": "LiveView",
+    "feature": "image.zoomPosition",
+    "status": "PASS",
+    "details": "Position: {\"left\":1412,\"top\":944}"
+  },
+  {
+    "category": "LiveView",
+    "feature": "image.histogram",
+    "status": "UNSUPPORTED",
+    "details": "No histogram data in frame"
+  },
+  {
+    "category": "LiveView",
+    "feature": "camera.stopLiveView()",
+    "status": "PASS",
+    "details": "EVF stopped"
+  },
+  {
+    "category": "Storage",
+    "feature": "camera.getVolumes()",
+    "status": "PASS",
+    "details": "Found 1 volume(s)"
+  },
+  {
+    "category": "Storage",
+    "feature": "Volume [SD]",
+    "status": "PASS",
+    "details": "storageType: 0, readable: false, writable: false, free: 0"
+  },
+  {
+    "category": "Storage",
+    "feature": "Volume [SD] access",
+    "status": "UNSUPPORTED",
+    "details": "Volume is not readable (no SD card inserted)"
+  },
+  {
+    "category": "Capture",
+    "feature": "takePicture() event trigger",
+    "status": "PASS",
+    "details": "Received file IMG_0001.JPG (JPEG)"
+  },
+  {
+    "category": "Capture",
+    "feature": "file.downloadToPath()",
+    "status": "PASS",
+    "details": "Downloaded to /Users/mamuliady/Documents/GitHub/napi-canon-cameras/examples/images/IMG_0001.JPG (2076624 bytes)"
+  },
+  {
+    "category": "Lifecycle",
+    "feature": "camera.disconnect()",
+    "status": "PASS",
+    "details": "Session closed cleanly"
+  }
+]

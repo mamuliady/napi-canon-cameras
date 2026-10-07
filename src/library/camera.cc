@@ -161,6 +161,15 @@ namespace CameraApi {
         EdsSetPropertyData(edsCamera_, 0x01000000, 0x9780670, sizeof(id), &id);
         id = kEdsPropID_Aspect;
         EdsSetPropertyData(edsCamera_, 0x01000000, 0x3FB1718B, sizeof(id), &id);
+        // difotoin: the body's overheat indicator. Without this unlock every read
+        // of kEdsPropID_TempStatus fails with EDS_ERR_PROTECTION_VIOLATION (0x09)
+        // — hardware-confirmed on an EOS RP, 2026-07-28. The gate property
+        // (0x01000000) and the per-property key are Canon's own, taken from the
+        // EDSDK 13.18.0 sample MultiCamCui/src/CameraModel.cpp:63. Like every
+        // unlock above it MUST stay before EdsOpenSession; after the session is
+        // open the camera refuses it.
+        id = kEdsPropID_TempStatus;
+        EdsSetPropertyData(edsCamera_, 0x01000000, 0x14840DF1, sizeof(id), &id);
 
         EdsError error = EdsOpenSession(edsCamera_);
         if (error != EDS_ERR_OK) {
@@ -266,6 +275,9 @@ namespace CameraApi {
             error = EdsSetPropertyData(
                 edsCamera_, kEdsPropID_Evf_OutputDevice, 0, sizeof(device), &device
             );
+            if (error == EDS_ERR_OK) {
+                updateLiveViewStatus();
+            }
         }
         return error;
     }
@@ -284,6 +296,9 @@ namespace CameraApi {
             error = EdsSetPropertyData(
                 edsCamera_, kEdsPropID_Evf_OutputDevice, 0, sizeof(device), &device
             );
+            if (error == EDS_ERR_OK) {
+                updateLiveViewStatus();
+            }
         }
         return error;
     }
@@ -690,20 +705,26 @@ namespace CameraApi {
                 info.Env(), "Argument 0 must be an property identifier."
             );
         }
-        if (info.Length() < 1) {
+        if (info.Length() < 2) {
             throw Napi::TypeError::New(
                 info.Env(), "Argument 1 must be an property value."
             );
+        }
+        uint32_t specifier = 0;
+        Napi::Value val = info[1];
+        if (info.Length() > 2) {
+            specifier = info[1].As<Napi::Number>().Uint32Value();
+            val = info[2];
         }
         auto property = Napi::ObjectWrap<CameraProperty>::Unwrap(
             CameraProperty::NewInstance(
                 info.Env(),
                 camera_,
                 CameraProperty::GetIDFor(info[0]),
-                (info.Length() > 1) ? info[1].As<Napi::Number>().Int32Value() : 0
+                specifier
             )
         );
-        property->SetValue(info, info[1]);
+        property->SetValue(info, val);
         return info.Env().Undefined();
     }
 

@@ -1,6 +1,6 @@
 {
     "variables": {
-        "edsdk_version": "131712CD",
+        "edsdk_version": "132021CD",
         "edsdk_directory%": "EDSDK",
         "openssl_fips": 0
     },
@@ -60,9 +60,6 @@
                 [
                     "OS==\"win\" and target_arch==\"x64\"",
                     {
-                        "variables": {
-                            "edsdk_directory": "EDSDKv<(edsdk_version)"
-                        },
                         "include_dirs": [
                             "<(module_root_dir)/third_party/<(edsdk_directory)/Windows/EDSDK/Header"
                         ],
@@ -83,9 +80,6 @@
                 [
                     "OS==\"win\" and target_arch==\"ia32\"",
                     {
-                        "variables": {
-                            "edsdk_directory": "EDSDKv<(edsdk_version)"
-                        },
                         "include_dirs": [
                             "<(module_root_dir)/third_party/<(edsdk_directory)/Windows/EDSDK/Header"
                         ],
@@ -107,25 +101,23 @@
                     "OS==\"mac\"",
                     {
                         "defines": [ '__MACOS__' ],
-                        "variables": {
-                            "edsdk_directory": "EDSDKv<(edsdk_version)M"
-                        },
                         "include_dirs": [
                             "<(module_root_dir)/third_party/<(edsdk_directory)/macos/EDSDK/Header"
                         ],
                         "libraries": [
-                          "<(module_root_dir)/third_party/<(edsdk_directory)/macos/EDSDK/Framework/EDSDK.framework"
+                          "-F<(module_root_dir)/third_party/<(edsdk_directory)/macos/EDSDK/Framework",
+                          "-framework EDSDK"
                         ],
                         'xcode_settings': {
                             'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
-                            'MACOSX_DEPLOYMENT_TARGET': '10.15',
+                            'MACOSX_DEPLOYMENT_TARGET': '11.0',
                             'OTHER_CFLAGS': [
                                 '-std=c++17',
                                 '-Wno-ignored-attributes'
                             ],
                             'OTHER_LDFLAGS': [
-                                '-Wl,-rpath,./prebuilds/darwin-x64/,-rpath,./node_modules/@dimensional/napi-canon-cameras/prebuilds/darwin-x64/',
-                                '-F ../third_party/<(edsdk_directory)/macos/EDSDK/Framework/',
+                                '-Wl,-rpath,@loader_path/,-rpath,@loader_path/../Frameworks,-rpath,./prebuilds/darwin-arm64/,-rpath,./prebuilds/darwin-x64/,-rpath,./node_modules/@dimensional/napi-canon-cameras/prebuilds/darwin-arm64/,-rpath,./node_modules/@dimensional/napi-canon-cameras/prebuilds/darwin-x64/',
+                                '-F<(module_root_dir)/third_party/<(edsdk_directory)/macos/EDSDK/Framework',
                                 '-framework EDSDK'
                             ]
                         },
@@ -133,7 +125,7 @@
                             {
                                 "destination": "<(PRODUCT_DIR)",
                                 "files": [
-                                    "<(module_root_dir)/third_party/<(edsdk_directory)/macos/EDSDK/Framework/EDSDK.Framework"
+                                    "<(module_root_dir)/third_party/<(edsdk_directory)/macos/EDSDK/Framework/EDSDK.framework"
                                 ]
                             }
                         ]

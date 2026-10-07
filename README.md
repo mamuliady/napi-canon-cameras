@@ -1,128 +1,187 @@
 # @dimensional/napi-canon-cameras
 
-EDSDK (Canon camera) wrapper module for Node.js
+Node.js N-API native addon module for Canon EOS digital cameras, wrapping the official Canon EDSDK (v13.20.21 / v13.18.00).
+
+Supports **macOS** (Apple Silicon `arm64` and Intel `x64`) and **Windows** (x64 and ia32).
 
 * [Features](#features)
-* [Usage Example](#usage)
-* [Build Package](#build-package)
+* [Usage Examples](#usage)
+  * [Live View with getBlob() / getJPEGBuffer()](#live-view-streaming)
+  * [Take Picture & Download to Host](#take-picture)
+* [Comparison with Previous Tarball (napi-canon-cameras-41.tgz)](#comparison-with-previous-tarball)
+* [macOS Specifics & Troubleshooting](#macos-setup--troubleshooting)
+* [Hardware Compatibility Report (Canon EOS RP)](#hardware-compatibility)
+* [Build & Package](#build--package)
   * [NPM Tasks](#npm-tasks)
-* [FAQ](#faq)
 * [API Documentation](API.md)
+
+---
 
 ## Features
 
-The EDSDK provides a lot of features and not all of them are
-implemented in the module. Our use case was a photo booth 
-application.
+- [x] **Platform Support**:
+  - macOS (Apple Silicon `arm64` + Intel `x64`) with signed `EDSDK.framework`
+  - Windows (x64 + ia32) with dynamic `EDSDK.dll`
+- [x] **Camera Discovery & Browser**:
+  - Enumerate connected Canon cameras (`cameraBrowser.getCameras()`)
+  - Hotplug device detection events (`CameraAdd`, `CameraRemove`)
+- [x] **Live View (EVF)**:
+  - **High-Performance Binary Buffer**: `image.getBlob()` and `image.getJPEGBuffer()` return raw JPEG binary buffers directly without base64 encoding overhead
+  - Legacy Base64: `image.getDataURL()`
+  - Real-time status: `camera.isLiveViewActive()`
+  - Frame metadata: zoom factor, focus/zoom coordinates, coordinate system dimensions
+- [x] **Capture & File Transfer**:
+  - `camera.takePicture()`
+  - Save directly to host RAM/disk (`Option.SaveTo.Host`) without needing an SD card
+  - Save to camera SD card (`Option.SaveTo.Camera`) or both (`Option.SaveTo.Both`)
+  - Direct file download: `file.downloadToPath(dir)`
+- [x] **Camera Properties**:
+  - Read & Write ISO sensitivity (`ISOSpeed`)
+  - Read & Write White Balance (`WhiteBalance`)
+  - Read & Write Drive Mode (`DriveMode`)
+  - Read & Write Aperture (`Av`) & Shutter Speed (`Tv`)
+  - Read Battery Level, Firmware Version, Lens Name, Serial Number, Temperature Status
+- [x] **Storage & Card Access**:
+  - Enumerate storage volumes (`camera.getVolumes()`)
+  - Query volume metadata (label, capacity, read/write status)
+  - Recursive directory tree and file browsing (when SD card is inserted)
 
-- [x] List Cameras
-- [x] Camera Events
-- [ ] Read Camera Properties
-    - [x] Text
-    - [x] Integer
-      - [x] Flags (true/false)
-      - [x] Options (named list values)
-      - [x] Aperture
-      - [x] Shutter Speed
-      - [x] Exposure Compensation
-    - [x] Integer Array
-    - [x] Time
-- [ ] Write Camera Properties
-    - [ ] Text Properties
-    - [x] Integer
-    - [ ] Integer Array
-    - [ ] Time
-- [x] Take Picture
-    - [x] Download To Directory
-    - [x] Download To File
-    - [x] Download To String (Base64)
-- [ ] Live View
-    - [x] Download Image To Data URL
-    - [x] Properties
-    - [x] Histogram
-    - [ ] Rolling & Pitching
-    - [ ] PowerZoom
-- [ ] Storage
-    - [x] List Volumes
-    - [x] List Directories and Files
-    - [x] Download Thumbnail
-    - [x] Download Files
-
+---
 
 ## Usage
 
+### Live View Streaming
+
 ```typescript
-import {
-    Camera, CameraProperty, FileChangeEvent, ImageQuality,
-    Option,
-    watchCameras
-} from '../';
+import { cameraBrowser, CameraProperty, Option } from '@dimensional/napi-canon-cameras';
 
-process.on('SIGINT', () => process.exit());
-
-// catch download request events
-cameraBrowser.setEventHandler(
-    (eventName, event) => {
-        if (eventName === CameraBrowser.Events.DownloadRequest) {
-            const file = (event as DownloadRequestEvent).file;
-            console.log(file);
-            const localFile = file.downloadToPath(__dirname + '/images');
-            console.log(`Downloaded ${file.name}.`);
-
-            process.exit();
-        }
-    }
-);
-
-// get first camera
+// Obtain first available camera
 const camera = cameraBrowser.getCamera();
-if (camera) {
-    console.log(camera);
-    camera.connect();
-    // configure
-    camera.setProperties(
-        {
-            [CameraProperty.ID.SaveTo]: Option.SaveTo.Host,
-            [CameraProperty.ID.ImageQuality]: ImageQuality.ID.LargeJPEGFine,
-            [CameraProperty.ID.WhiteBalance]: Option.WhiteBalance.Fluorescent
-        }
-    );
-    // trigger picture
-    camera.takePicture();
-} else {
-    console.log('No camera found.');
+if (!camera) {
+    throw new Error('No Canon camera found.');
 }
 
-// watch for camera events
-watchCameras();
-```
- 
-## Build Package
+camera.connect();
 
-The package does not include the Canon EDSDK files. To install the package you will have 
-to build a TGZ.
- 
- 1. Unpack the Canon EDSDK into `third_party`. Keep the package name as subdirectory.
-    * `EDSDKv131800W.zip` → `third_party/EDSDKv131800W`
- 2. Make sure the variable `edsdk_version` in `binding.gyp` matches the EDSDK version. (The numeric part of the 
-    package name)
- 3. Run `npm run package`
- 4. Look for `../node_packages/@dimensional/napi-canon-cameras.tgz`
- 5. `cd ../YourProject` (Switch to your project directory)
- 6. `npm i ../node_packages/@dimensional/napi-canon-cameras.tgz`
+// Verify Live View capability
+if (camera.getProperty(CameraProperty.ID.Evf_Mode).available) {
+    camera.startLiveView();
+
+    // Pull live view frames in a loop or timer
+    const interval = setInterval(() => {
+        const image = camera.getLiveViewImage();
+        if (image) {
+            // Get raw JPEG bytes as Buffer / Uint8Array (no Base64 overhead!)
+            const jpegBuffer = image.getBlob(); // or image.getJPEGBuffer()
+            console.log(`Frame received: ${jpegBuffer.length} bytes (dimensions: ${image.coordinateSystem.width}x${image.coordinateSystem.height})`);
+
+            // Example: write frame directly to disk or send over WebSocket/HTTP
+            // fs.writeFileSync('live-frame.jpg', jpegBuffer);
+        }
+    }, 60);
+
+    // Stop after some time
+    setTimeout(() => {
+        clearInterval(interval);
+        camera.stopLiveView();
+        camera.disconnect();
+    }, 5000);
+}
+```
+
+### Take Picture
+
+```typescript
+import {
+    cameraBrowser,
+    Camera,
+    CameraProperty,
+    Option,
+    ImageQuality,
+    watchCameras
+} from '@dimensional/napi-canon-cameras';
+
+const camera = cameraBrowser.getCamera();
+if (!camera) throw new Error('No camera found.');
+
+// Listen for download requests
+camera.setEventHandler((eventName, event) => {
+    if (eventName === Camera.EventName.DownloadRequest || eventName === Camera.EventName.FileCreate) {
+        const file = (event as any).file;
+        console.log(`Downloading ${file.name}...`);
+        file.downloadToPath(__dirname + '/downloads');
+        console.log('Download complete!');
+        process.exit(0);
+    }
+});
+
+camera.connect();
+
+// Configure capture target to Host (works without SD card)
+camera.setProperties({
+    [CameraProperty.ID.SaveTo]: Option.SaveTo.Host,
+    [CameraProperty.ID.ImageQuality]: ImageQuality.ID.LargeJPEGFine
+});
+
+// Watch events & fire shutter
+const unwatch = watchCameras(50);
+camera.takePicture();
+```
+
+---
+
+## macOS Setup & Troubleshooting
+
+### Exclusive USB Claim by `ptpcamerad`
+
+When a Canon camera is connected via USB to a Mac, macOS's system daemon (`/usr/libexec/ptpcamerad`) automatically claims exclusive control of the USB PTP interface. This causes Canon's EDSDK to return `DEVICE_NOT_FOUND` or an empty list `[]`.
+
+**Solution**:
+Terminate `ptpcamerad` before connecting:
+```bash
+pkill -9 ptpcamerad || true
+```
+Alternatively, in Node.js scripts before opening camera sessions:
+```javascript
+const { execSync } = require('child_process');
+try { execSync('pkill -9 ptpcamerad 2>/dev/null'); } catch (e) {}
+```
+
+---
+
+## Hardware Compatibility
+
+Full automated hardware validation was executed against a physical **Canon EOS RP** (Firmware 1.6.1 with RF 50mm F1.8 STM lens) over USB on Apple Silicon macOS.
+
+- **Total features tested**: 134
+- **Passed**: 75
+- **Failed**: 0
+- **Hardware-dependent / Unsupported**: 59 (e.g. mirror lockup on mirrorless bodies, external flash properties without attached speedlite, and filesystem browsing when no SD card is inserted).
+
+Detailed breakdown of all tested properties and commands is available in [CANON_EOS_RP_COMPATIBILITY.md](docs/CANON_EOS_RP_COMPATIBILITY.md).
+
+---
+
+## Build & Package
+
+### Prerequisites
+- Node.js >= 18
+- Python 3 and C++ build tools (`make` / Xcode command line tools on macOS, Visual Studio on Windows)
+- Canon EDSDK placed in `third_party/EDSDK`:
+  - macOS: `third_party/EDSDK/EDSDK.framework`
+  - Windows: `third_party/EDSDK/Dll/` and `third_party/EDSDK/Library/`
 
 ### NPM Tasks
 
-* `package` - Create TGZ package for AddOn
-* `prebuild` - Build for 32 and 64bit Node.js
-* `prebuild:x64` - Build for 64bit Node.js
-* `prebuild:ia32` - Build for 32bit Node.js
-* `build:docs` - Update API documentation in README.md
-* `build:stubs` - Update and build stubs (needs prebuild AddOn)
-* `clean` - Remove build artifacts
+* `npm run prebuild:darwin` - Compile universal macOS prebuilds (`arm64` and `x64`) and build stubs
+* `npm run prebuild:win32` - Compile Windows prebuilds (`ia32` and `x64`) and build stubs
+* `npm run build:stubs` - Regenerate TypeScript definitions and JavaScript stubs
+* `npm test` - Run full Jest test suite
+* `npm run lint` - Run ESLint code checks
+* `npm run package` - Generate distributable `.tgz` package in parent directory
 
-## FAQ
+---
 
-### Does the module work in Electron Applications?
+## License
 
-Yes.
+GPL-3.0-or-later

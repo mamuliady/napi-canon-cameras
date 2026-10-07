@@ -40,6 +40,8 @@ namespace CameraApi {
 
             Napi::Value GetDataURL(const Napi::CallbackInfo &info);
 
+            Napi::Value GetJPEGBuffer(const Napi::CallbackInfo &info);
+
             Napi::Value GetCoordinateSystem(const Napi::CallbackInfo &info);
 
             Napi::Value GetHistogram(const Napi::CallbackInfo &info);

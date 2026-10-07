@@ -12,6 +12,7 @@
 import { cameraBrowser, CameraBrowser, Camera, CameraProperty, LiveViewImage, watchCameras } from '../';
 import { EventEmitter } from 'events';
 import * as fs from 'fs';
+import * as http from 'http';
 import * as path from 'path';
 
 const events = new EventEmitter();
@@ -98,7 +99,7 @@ function runOptimizedLiveView(camera: Camera) {
                 
                 // Save every 60th frame as sample
                 if (frameCount % 60 === 0) {
-                    const buffer = image.getDataURL();
+                    const buffer = image.getBlob();
                     const filename = path.join(outputDir, `frame-${frameCount}.jpg`);
                     fs.writeFileSync(filename, buffer);
                     console.log(`  → Saved: ${filename}`);
@@ -174,11 +175,9 @@ function runOptimizedLiveView(camera: Camera) {
 function runLiveViewWebStream(camera: Camera) {
     console.log('\n=== Starting LiveView Web Stream ===');
     
-    const http = require('http');
-    
     camera.startLiveView();
     
-    const server = http.createServer((req: any, res: any) => {
+    const server = http.createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
         if (req.url === '/stream') {
             res.writeHead(200, {
                 'Content-Type': 'multipart/x-mixed-replace; boundary=frame',
@@ -205,8 +204,8 @@ function runLiveViewWebStream(camera: Camera) {
                         
                         // Send as multipart/x-mixed-replace boundary
                         res.write(Buffer.from(
-                            `--frame\r\n` +
-                            `Content-Type: image/jpeg\r\n` +
+                            '--frame\r\n' +
+                            'Content-Type: image/jpeg\r\n' +
                             `Content-Length: ${jpegBuffer.length}\r\n\r\n`
                         ));
                         res.write(jpegBuffer);

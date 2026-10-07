@@ -22,19 +22,18 @@ try {
         try {
             const image = camera.getLiveViewImage();
             if (image) {
-                const data = image.getDataURL();
-                console.log('\nImage data info:');
-                console.log('  Type:', typeof data);
-                console.log('  Is Buffer:', Buffer.isBuffer(data));
-                console.log('  Length:', data.length);
-                
-                if (typeof data === 'string') {
-                    console.log('  First 100 chars:', data.substring(0, 100));
-                    console.log('  Starts with data:image:', data.startsWith('data:image'));
-                } else if (Buffer.isBuffer(data)) {
-                    const buf = data as Buffer;
-                    console.log('  First 10 bytes:', buf.slice(0, 10));
-                    console.log('  Is JPEG (starts with FFD8):', buf[0] === 0xFF && buf[1] === 0xD8);
+                const dataUrl = image.getDataURL();
+                const blob = image.getBlob();
+                console.log('\nImage dataURL info:');
+                console.log('  Type:', typeof dataUrl);
+                console.log('  Length:', dataUrl ? dataUrl.length : 0);
+
+                console.log('\nImage getBlob() info:');
+                console.log('  Is Buffer/Uint8Array:', Buffer.isBuffer(blob) || blob instanceof Uint8Array);
+                console.log('  Byte length:', blob ? blob.length : 0);
+                if (blob && blob.length > 2) {
+                    console.log('  First 10 bytes:', Buffer.from(blob).slice(0, 10));
+                    console.log('  Is JPEG (starts with FFD8):', blob[0] === 0xFF && blob[1] === 0xD8);
                 }
                 
                 const coords = image.coordinateSystem;

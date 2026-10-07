@@ -44,6 +44,24 @@ export class LiveViewImage {
     }
 
     /**
+     * Return the raw JPEG bytes without base64 encoding.
+     *
+     * @return {Uint8Array} jpeg bytes
+     */
+    getJPEGBuffer(): Uint8Array {
+        throw new Error('Not implemented - stub only.');
+    }
+
+    /**
+     * Return image data as binary buffer/blob instead of base64 format.
+     *
+     * @return {Uint8Array} jpeg bytes
+     */
+    getBlob(): Uint8Array {
+        throw new Error('Not implemented - stub only.');
+    }
+
+    /**
      * Coordinate system of the live view image
      *
      * @readonly

@@ -67,6 +67,23 @@ namespace CameraApi {
         return info.Env().Undefined();
     }
 
+    Napi::Value LiveViewImage::GetJPEGBuffer(const Napi::CallbackInfo &info) {
+        EdsUInt64 imageDataLength = 0;
+        unsigned char *imageData = nullptr;
+
+        EdsGetLength(streamRef_, &imageDataLength);
+        if (imageDataLength > 0) {
+            EdsGetPointer(streamRef_, (EdsVoid **) &imageData);
+            return Napi::Buffer<unsigned char>::Copy(
+                info.Env(),
+                imageData,
+                static_cast<size_t>(imageDataLength)
+            );
+        }
+
+        return Napi::Buffer<unsigned char>::New(info.Env(), 0);
+    }
+
     Napi::Value LiveViewImage::GetCoordinateSystem(const Napi::CallbackInfo &info) {
         Napi::Env env = info.Env();
         EdsSize coordinateSystem;
@@ -263,6 +280,8 @@ namespace CameraApi {
                 InstanceAccessor<&LiveViewImage::GetZoomPosition>("zoomPosition"),
 
                 InstanceMethod("getDataURL", &LiveViewImage::GetDataURL),
+                InstanceMethod("getJPEGBuffer", &LiveViewImage::GetJPEGBuffer),
+                InstanceMethod("getBlob", &LiveViewImage::GetJPEGBuffer),
             }
         );
         JSConstructor(&func);

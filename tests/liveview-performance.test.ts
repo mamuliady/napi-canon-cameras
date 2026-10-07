@@ -57,7 +57,7 @@ export function testBasicInterval() {
                     const totalTime = (Date.now() - startTime) / 1000;
                     const avgFps = frameCount / totalTime;
                     
-                    console.log(`\nTest Complete:`);
+                    console.log('\nTest Complete:');
                     console.log(`  Total Frames: ${frameCount}`);
                     console.log(`  Total Time: ${totalTime.toFixed(2)}s`);
                     console.log(`  Average FPS: ${avgFps.toFixed(1)}`);
@@ -125,7 +125,7 @@ export function testOptimizedImmediate() {
                     const totalTime = (now - startTime) / 1000;
                     const avgFps = frameCount / totalTime;
                     
-                    console.log(`\nTest Complete:`);
+                    console.log('\nTest Complete:');
                     console.log(`  Total Frames: ${frameCount}`);
                     console.log(`  Total Time: ${totalTime.toFixed(2)}s`);
                     console.log(`  Average FPS: ${avgFps.toFixed(1)}`);
@@ -216,7 +216,7 @@ export function testWithFrameSaving() {
                     const totalTime = (now - startTime) / 1000;
                     const avgFps = frameCount / totalTime;
                     
-                    console.log(`\nTest Complete:`);
+                    console.log('\nTest Complete:');
                     console.log(`  Total Frames: ${frameCount}`);
                     console.log(`  Saved Frames: ${Math.floor(frameCount / 30)}`);
                     console.log(`  Total Time: ${totalTime.toFixed(2)}s`);
@@ -304,16 +304,16 @@ export function testFrameTimingAnalysis() {
                     const variance = frameTimes.reduce((sum, t) => sum + Math.pow(t - avgFrameTime, 2), 0) / frameTimes.length;
                     const stdDev = Math.sqrt(variance);
                     
-                    console.log(`\nTest Complete:`);
+                    console.log('\nTest Complete:');
                     console.log(`  Total Frames: ${frameCount}`);
                     console.log(`  Total Time: ${totalTime.toFixed(2)}s`);
                     console.log(`  Average FPS: ${avgFps.toFixed(1)}`);
-                    console.log(`\nFrame Timing:`);
+                    console.log('\nFrame Timing:');
                     console.log(`  Average: ${avgFrameTime.toFixed(2)}ms`);
                     console.log(`  Min: ${minFrameTime}ms`);
                     console.log(`  Max: ${maxFrameTime}ms`);
                     console.log(`  Std Dev: ${stdDev.toFixed(2)}ms`);
-                    console.log(`  Target (30fps): 33.33ms`);
+                    console.log('  Target (30fps): 33.33ms');
                     
                     camera.stopLiveView();
                     camera.disconnect();

@@ -50,11 +50,14 @@ namespace CameraApi {
     }
 
     Napi::Value Aspect::GetPrimitive(const Napi::CallbackInfo &info) {
-        std::uint32_t  hint = info[0].As<Napi::Number>().Uint32Value();
-        return GetValue(info);
-        if (info.Length() > 0) {
-            std::uint32_t  hint = info[0].As<Napi::Number>().Uint32Value();
-            return GetValue(info);
+        if (info.Length() > 0 && info[0].IsString()) {
+            std::string hint = info[0].As<Napi::String>().Utf8Value();
+            if (hint == "number") {
+                return GetValue(info);
+            }
+            if (hint == "string") {
+                return GetLabel(info);
+            }
         }
         return info.Env().Null();
     }
@@ -125,8 +128,7 @@ namespace CameraApi {
             InstanceAccessor<&Aspect::ToStringTag>(Napi::Symbol::WellKnown(env, "toStringTag")),
             InstanceMethod(GetPublicSymbol(env, "nodejs.util.inspect.custom"), &Aspect::Inspect),
 
-            // StaticValue("ID", IDs, napi_enumerable),
-            // StaticValue("Values", Values, napi_enumerable)
+            StaticValue("ID", FileTypes, napi_enumerable)
         };
 
         Napi::Function func = DefineClass(env, Aspect::JSClassName, properties);

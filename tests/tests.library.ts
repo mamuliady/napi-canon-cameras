@@ -23,6 +23,7 @@ import LibraryOptionTests from './library/Option.test';
 import LibraryOutputDeviceTests from './library/OutputDevice.test';
 import LibraryShutterSpeedTests from './library/ShutterSpeed.test';
 import CommonAspectTests from './common/Aspect.test';
+import './library/LiveViewImage.test';
 
 describe(
     'Library Tests',

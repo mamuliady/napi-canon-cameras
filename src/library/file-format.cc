@@ -4,14 +4,23 @@
 namespace CameraApi {
 
 
+    namespace {
+        constexpr EdsInt32 kObjectFormatUnknown = 0x00000000;
+        constexpr EdsInt32 kObjectFormatJpeg = 0x3801;
+        constexpr EdsInt32 kObjectFormatCR2 = 0xB103;
+        constexpr EdsInt32 kObjectFormatMP4 = 0xB982;
+        constexpr EdsInt32 kObjectFormatCR3 = 0xB108;
+        constexpr EdsInt32 kObjectFormatHeif = 0xB10B;
+    }
+
     const LabelMap &FileFormatLabels() {
         static const LabelMap map = {
-            {kEdsObjectFormat_Unknown, "Unknown"},
-            {kEdsObjectFormat_Jpeg, "JPEG"},
-            {kEdsObjectFormat_CR2, "CR2"},
-            {kEdsObjectFormat_CR3, "CR3"},
-            {kEdsObjectFormat_MP4, "MP4"},
-            {kEdsObjectFormat_HEIF_CODE, "HEIF_CODE"}
+            {kObjectFormatUnknown, "Unknown"},
+            {kObjectFormatJpeg, "JPEG"},
+            {kObjectFormatCR2, "CR2"},
+            {kObjectFormatCR3, "CR3"},
+            {kObjectFormatMP4, "MP4"},
+            {kObjectFormatHeif, "HEIF_CODE"}
         };
         return map;
     }
